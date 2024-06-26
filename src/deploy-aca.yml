@@ -63,7 +63,7 @@ parameters:
     default: false
 
 variables:
-  - template: pipeline-vars.yml
+  - template: ../cicd/build/azDevOps/azure/pipeline-vars.yml  
   - name: appname
     value: "frontend"
   - name: tf_state_key

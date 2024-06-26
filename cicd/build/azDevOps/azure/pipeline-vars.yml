@@ -24,13 +24,13 @@ variables:
   # there are some best practices around this if you are going for feature based environments
   # avoid running anything past dev that is not on master
   - name: tf_state_rg
-    value: stacks-terraform-state
+    value: Stacks-Ancillary-Resources #stacks-terraform-state
   - name: tf_state_storage
-    value: stacksstatehjfis
+    value: amidostackstfstate #stacksstatehjfis
   - name: tf_state_container
     value: tfstate
-  - name: tf_state_key
-    value: acacore
+  # - name: tf_state_key
+  #   value: acacore
 
   # ------- GitHub
   - name: create_release
