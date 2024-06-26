@@ -28,9 +28,9 @@ pr:
       - "main"
   paths:
     include:
-      - build/azDevOps/*
-      - build/taskctl/*
-      - deploy/terraform/azure/*
+      - cicd/build/azDevOps/*
+      - cicd/build/taskctl/*
+      - cicd/deploy/terraform/azure/*
 
 trigger:
   branches:
@@ -38,9 +38,9 @@ trigger:
       - "main"
   paths:
     include:
-      - build/azDevOps/*
-      - build/taskctl/*
-      - deploy/terraform/azure/*
+      - cicd/build/azDevOps/*
+      - cicd/build/taskctl/*
+      - cicd/deploy/terraform/azure/*
 
 # Configure parameters for running the build
 parameters:

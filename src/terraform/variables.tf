@@ -60,7 +60,7 @@ variable "location_name_map" {
 
 variable "acr_name" {
   type        = string
-  default     = "satacrtest" #"satcontdevuksshared"
+  default     = "satacrtest" #"satacrtest" satcontdevuksshared
   description = "Name of ACR"
 }
 
