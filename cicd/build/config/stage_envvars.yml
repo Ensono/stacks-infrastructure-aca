@@ -1,0 +1,50 @@
+default:
+  variables:
+    - name: CLOUD_PLATFORM
+      description: Cloud that is being targeted, e.g. aws or azure
+  credentials:
+    azure:
+      - name: ARM_CLIENT_ID
+      - name: ARM_CLIENT_SECRET
+      - name: ARM_SUBSCRIPTION_ID
+      - name: ARM_TENANT_ID
+    aws:
+      - name: AWS_ACCESS_KEY_ID
+      - name: AWS_SECRET_ACCESS_KEY
+      - name: AWS_REGION
+
+stages:
+  - name: stacks-aci
+    variables:
+      - name: TF_FILE_LOCATION
+        description: Path to the Terraform template files
+      - name: TF_BACKEND_INIT
+        description: Arguments that should be passed to Terraform during the init process
+      - name: TF_BACKEND_PLAN
+        description: Arguments that should be passed to Terraform during the plan process
+        required: false
+      - name: TF_VAR_name_company
+        description: Name of the company that the cluster is being built for
+      - name: TF_VAR_name_project
+        description: Name of the project
+      - name: TF_VAR_name_component
+      - name: TF_VAR_name_environment
+      - name: TF_VAR_stage
+      - name: TF_VAR_attributes
+        required: false
+      - name: TF_VAR_tags
+        required: false
+      - name: TF_VAR_resource_group_location
+        description: Location that the cluster should be deployed to
+      - name: TF_VAR_container_group_name
+        description: Name of your Azure Container Group.
+      - name: TF_VAR_location
+        description: The location of the resource group
+      - name: TF_VAR_resource_group_name
+        description: The name of the resource group where the Azure Container Group and other new components (ACR, VNET) should be created or where the existing ACR is located.
+      - name: TF_VAR_create_acr
+        description: A boolean flag indicating whether to create a new Azure Container Registry (ACR). If set to true, a new ACR will be created; if set to false, an existing ACR will be used.
+      - name: TF_VAR_acr_name
+        description: The name of the new or existing Azure Container Registry (ACR).
+      - name: TF_VAR_acr_location
+        description: The location/region where the Azure Container Registry (ACR) should be created or where the existing ACR is located.
