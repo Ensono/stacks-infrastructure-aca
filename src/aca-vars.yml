@@ -24,7 +24,7 @@ variables:
   # - name: DOCKER_IMAGE_NAME
   #   value: "frontendapp"
   - name: DOCKER_BUILD_ARGS
-    value: src/app
+    value: "src/app"
 
 
 
