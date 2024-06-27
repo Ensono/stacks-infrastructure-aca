@@ -5,13 +5,13 @@
 variable "name_company" {
   description = "Company Name - should/will be used in conventional resource naming"
   #default     = "sat"
-  type        = string
+  type = string
 }
 
 variable "name_project" {
   description = "Project Name - should/will be used in conventional resource naming"
   #default     = "cont"
-  type        = string
+  type = string
 }
 
 variable "name_component" {
@@ -21,7 +21,7 @@ variable "name_component" {
 }
 
 variable "stage" {
-  type    = string
+  type = string
   #default = "dev"
 }
 
