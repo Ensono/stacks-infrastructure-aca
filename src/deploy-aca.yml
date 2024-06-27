@@ -89,13 +89,13 @@ stages:
   - stage: Build
     variables:
       - group: stacks-credentials-nonprod-kv
+      - template: aca-vars.yml
     jobs:
       - job: Setup
         pool:
           vmImage: $(pool_vm_image)
         steps:
           - template: ../cicd/build/azDevOps/templates/setup.yml
-          - template: aca-vars.yml
             parameters:
               TaskctlVersion: ${{ variables.TaskctlVersion }}
 
