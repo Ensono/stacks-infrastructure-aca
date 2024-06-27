@@ -91,7 +91,7 @@ stages:
       - group: stacks-credentials-nonprod-kv
       - template: aca-vars.yml
     jobs:
-      - job: Setup
+      - job: Build
         pool:
           vmImage: $(pool_vm_image)
         steps:
@@ -128,7 +128,7 @@ stages:
 
 
           - task: Bash@3
-            displayName: Build Image
+            displayName: "TaskCTL: Build Image"
             inputs:
               targetType: inline
               script: |
