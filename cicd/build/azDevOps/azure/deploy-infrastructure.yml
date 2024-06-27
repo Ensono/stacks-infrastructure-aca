@@ -89,6 +89,7 @@ parameters:
     default: false
 variables:
   - template: pipeline-vars.yml
+  - template: infrastructure-aca-vars.yml
   - name: tf_state_key
     value: $(domain)_core
   # - template: agent-config-vars.yml
