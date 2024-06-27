@@ -68,4 +68,4 @@ pipelines:
     - task: build:container
 
   setup:
-    - task: buildnumber
+    - task: build:number
