@@ -98,6 +98,14 @@ stages:
             parameters:
               TaskctlVersion: ${{ variables.TaskctlVersion }}
 
+          - task: Bash@3
+            displayName: "TaskCTL: Setup"
+            inputs:
+              targetType: inline
+              script: taskctl setup
+            env:
+              DOCKER_IMAGE_TAG: $(version_number)
+
           # lint files in the repo
           # - task: Bash@3
           #   displayName: Lint
@@ -115,13 +123,7 @@ stages:
               TF_FILE_LOCATION: /app/src/terraform
               CLOUD_PLATFORM: "$(cloud_platform)"
 
-          - task: Bash@3
-            displayName: "TaskCTL: Setup"
-            inputs:
-              targetType: inline
-              script: taskctl setup
-            env:
-              DOCKER_IMAGE_TAG: $(version_number)
+
 
 
           - task: Bash@3
@@ -133,7 +135,7 @@ stages:
             env:
 
               #SELF_REPO_SRC: src/app
-              CLOUD_PROVIDER: $(cloud_provider) # Azure
+              CLOUD_PROVIDER: "Azure" #$(cloud_provider) # Azure
               ARM_TENANT_ID: $(azure-tenant-id)
               ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
               ARM_CLIENT_ID: $(azure-client-id)
