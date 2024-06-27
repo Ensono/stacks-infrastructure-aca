@@ -122,7 +122,7 @@ variable "container_app_ingress_external_enabled" {
 
 variable "image_name" {
   type        = string
-  default     = "satacrtest.azurecr.io/frontendapp"
+  default     = "satacrtest.azurecr.io/frontendtestapp"
   description = "The name of the image"
 }
 
