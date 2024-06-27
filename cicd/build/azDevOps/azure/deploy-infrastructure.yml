@@ -115,7 +115,7 @@ stages:
         pool:
           vmImage: $(pool_vm_image)
         steps:
-          - template: templates/setup.yml
+          - template: ../templates/setup.yml
             parameters:
               TaskctlVersion: ${{ variables.TaskctlVersion }}
 
@@ -179,7 +179,7 @@ stages:
               runOnce:
                 deploy:
                   steps:
-                    - template: templates/setup.yml
+                    - template: ../templates/setup.yml
                       parameters:
                         TaskctlVersion: ${{ variables.TaskctlVersion }}
 
@@ -275,7 +275,7 @@ stages:
   #       pool:
   #         vmImage: $(pool_vm_image)
   #       steps:
-  #         - template: templates/setup.yml
+  #         - template: ../templates/setup.yml
   #           parameters:
   #             TaskctlVersion: ${{ variables.TaskctlVersion }}
 
