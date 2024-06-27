@@ -206,6 +206,6 @@ stages:
                         # TF_VAR_name_project: $(project)
                         # TF_VAR_name_component: $(domain)
                         TF_VAR_name_environment: ${{ stage.environment_shortname }}
-                        TF_VAR_stage: ${{ stage.environment_shortname }}
+                        # TF_VAR_stage: ${{ stage.environment_shortname }}
                         TF_VAR_location: $(region)
                         TF_VAR_image_tag: $(version_number)
