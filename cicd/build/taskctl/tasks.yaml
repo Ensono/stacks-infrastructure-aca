@@ -35,7 +35,7 @@ tasks:
     context: powershell
     description: Create Terraform variables file
     command:
-      - /app/build/scripts/Set-TFVars.ps1 | Out-File -Path "${env:TF_FILE_LOCATION}/terraform.tfvars"
+      - /app/cicd/build/scripts/Set-TFVars.ps1 | Out-File -Path "${env:TF_FILE_LOCATION}/terraform.tfvars"
       - dir ${env:TF_FILE_LOCATION}
 
   infra:plan:
@@ -122,7 +122,7 @@ tasks:
         Import-Module Az.ContainerInstance
         # TODO: Remove below for now until correct outputs from the TF Module itself
         # Invoke-Terraform -Workspace -Arguments $env:TF_VAR_name_environment -Path $env:TF_FILE_LOCATION
-        # Invoke-Terraform -Output -Path $env:TF_FILE_LOCATION | /app/build/scripts/Set-EnvironmentVars.ps1 -prefix "TFOUT" -key "value" -passthru | ConvertTo-Yaml | Out-File -Path ${PWD}/inspec_inputs.yml
+        # Invoke-Terraform -Output -Path $env:TF_FILE_LOCATION | /app/cicd/build/scripts/Set-EnvironmentVars.ps1 -prefix "TFOUT" -key "value" -passthru | ConvertTo-Yaml | Out-File -Path ${PWD}/inspec_inputs.yml
         Set-Content -Path "${PWD}/inspec_inputs.yml" -Value ""
         Add-Content -Path ${PWD}/inspec_inputs.yml -Value "resource_group_name: ${env:TF_VAR_resource_group_name}"
         Add-Content -Path ${PWD}/inspec_inputs.yml -Value "location: ${env:TF_VAR_location}"
@@ -132,7 +132,7 @@ tasks:
     description: Build Docs for ACI
     context: docsenv
     command: |
-      /app/build/scripts/New-Glossary.ps1 -docpath /app/docs -path /app/tmp/glossary.adoc
+      /app/cicd/build/scripts/New-Glossary.ps1 -docpath /app/docs -path /app/tmp/glossary.adoc
       Invoke-AsciiDoc -PDF -basepath /app -config /app/docs.json -debug
 
   _release:
