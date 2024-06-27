@@ -65,7 +65,7 @@ parameters:
 variables:
   - template: ../cicd/build/azDevOps/azure/pipeline-vars.yml  
   - name: appname
-    value: "frontend"
+    value: "frontendtestapp"
   - name: tf_state_key
     value: $(domain)_$(appname)
   # - template: agent-config-vars.yml
