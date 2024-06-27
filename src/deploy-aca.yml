@@ -142,10 +142,10 @@ stages:
               ARM_CLIENT_ID: $(azure-client-id)
               ARM_CLIENT_SECRET: $(azure-client-secret)
 
-              DOCKER_CONTAINER_REGISTRY_NAME: satacrtest.azurecr.io
-              REGISTRY_RESOURCE_GROUP: satcontainerapptest
+              DOCKER_CONTAINER_REGISTRY_NAME: $(DOCKER_CONTAINER_REGISTRY_NAME)
+              REGISTRY_RESOURCE_GROUP: $(REGISTRY_RESOURCE_GROUP)
               DOCKER_IMAGE_NAME: $(appname)
-              DOCKER_BUILD_ARGS: src/app
+              DOCKER_BUILD_ARGS: $(DOCKER_BUILD_ARGS)
               DOCKER_IMAGE_TAG: $(version_number)
 
           # # Create the documentation for the repo

@@ -20,7 +20,7 @@ variables:
   - name: DOCKER_CONTAINER_REGISTRY_NAME
     value: "satacrtest.azurecr.io"
   - name: REGISTRY_RESOURCE_GROUP
-    value: satcontainerapptest
+    value: aca-test-rg
   # - name: DOCKER_IMAGE_NAME
   #   value: "frontendapp"
   - name: DOCKER_BUILD_ARGS
