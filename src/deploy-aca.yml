@@ -87,6 +87,8 @@ variables:
 
 stages:
   - stage: Build
+    variables:
+      - group: stacks-credentials-nonprod-kv
     jobs:
       - job: Setup
         pool:
