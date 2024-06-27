@@ -124,9 +124,6 @@ stages:
               TF_FILE_LOCATION: /app/src/terraform
               CLOUD_PLATFORM: "$(cloud_platform)"
 
-
-
-
           - task: Bash@3
             displayName: "TaskCTL: Build Image"
             inputs:
@@ -148,20 +145,20 @@ stages:
               DOCKER_BUILD_ARGS: $(DOCKER_BUILD_ARGS)
               DOCKER_IMAGE_TAG: $(version_number)
 
-          # # Create the documentation for the repo
-          # - task: Bash@3
-          #   displayName: Documentation
-          #   inputs:
-          #     targetType: inline
-          #     script: |
-          #       taskctl docs
+          # Create the documentation for the repo
+          - task: Bash@3
+            displayName: Documentation
+            inputs:
+              targetType: inline
+              script: |
+                taskctl docs
 
-          # # Upload the documentation as a build artifact
-          # - task: PublishBuildArtifacts@1
-          #   displayName: Publish Documentation
-          #   inputs:
-          #     pathToPublish: $(Build.SourcesDirectory)/outputs/docs
-          #     artifactName: docs
+          # Upload the documentation as a build artifact
+          - task: PublishBuildArtifacts@1
+            displayName: Publish Documentation
+            inputs:
+              pathToPublish: $(Build.SourcesDirectory)/outputs/docs
+              artifactName: docs
 
   # Called Non-Prod instead of Dev as all Non-Production stages will deploy to here
   - ${{ each stage in parameters.stages }}:
