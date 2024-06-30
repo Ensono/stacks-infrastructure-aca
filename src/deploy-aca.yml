@@ -209,8 +209,8 @@ stages:
                     # Upload the Terraform variables file and the plan for debugging
                     - ${{ if eq(parameters.upload, true) }}:
                         - template: ../cicd/build/azDevOps/templates/upload.yml
-                      parameters:
-                        contents: $(Build.SourcesDirectory)/src/terraform/*.tfvars
+                          parameters:
+                            contents: $(Build.SourcesDirectory)/src/terraform/*.tfvars
 
                     # Remove the container app if the parameter has been set
                     - ${{ if eq(parameters.destroy, true) }}:
