@@ -64,6 +64,7 @@ parameters:
 
 variables:
   - template: ../cicd/build/azDevOps/azure/pipeline-vars.yml  
+  - template: aca-vars.yml
   - name: appname
     value: "frontendtestapp"
   - name: tf_state_key
@@ -89,7 +90,6 @@ stages:
   - stage: Build
     variables:
       - group: stacks-credentials-nonprod-kv
-      - template: aca-vars.yml
     jobs:
       - job: Build
         pool:
