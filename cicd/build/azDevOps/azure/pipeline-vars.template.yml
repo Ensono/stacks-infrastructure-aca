@@ -66,13 +66,26 @@ variables:
     value: false
 
   # ------- GitHub
-  - name: create_release
-    value: false
-  - name: github_release_service_connection
-    value:
-  - name: github_org
-    value: $(company)
+  # - name: create_release
+  #   value: false
+  # - name: github_release_service_connection
+  #   value:
+  # - name: github_org
+  #   value: $(company)
 
   # ------- Resource Tags
   - name: team_owner
     value:
+
+
+  # ------- GitHub
+  - name: VERSION_NUMBER
+    value: $(Build.BuildNumber)
+  - name: COMMIT_ID
+    value: $(Build.SourceVersion)
+  - name: OWNER
+    value: ensono
+  - name: REPOSITORY
+    value: stacks-infrastructure-aca
+  - name: ARTIFACTS_DIR
+    value: artifacts/

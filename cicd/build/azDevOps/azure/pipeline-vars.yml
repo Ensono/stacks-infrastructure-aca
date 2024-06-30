@@ -33,23 +33,23 @@ variables:
   #   value: acacore
 
   # ------- GitHub
-  - name: create_release
-    value: false
-  - name: github_release_service_connection
-    value: GitHubReleases
-  - name: github_org
-    value: $(company)
+  # - name: create_release
+  #   value: false
+  # - name: github_release_service_connection
+  #   value: GitHubReleases
+  # - name: github_org
+  #   value: $(company)
 
-  # - name: VERSION_NUMBER
-  #   value: $(Build.BuildNumber)
-  # - name: COMMIT_ID
-  #   value: $(Build.SourceVersion)
-  # - name: OWNER
-  #   value: ensono
-  # - name: REPOSITORY
-  #   value: stacks-infrastructure-aci
-  # - name: ARTIFACTS_DIR
-  #   value: artifacts/
+  - name: VERSION_NUMBER
+    value: $(Build.BuildNumber)
+  - name: COMMIT_ID
+    value: $(Build.SourceVersion)
+  - name: OWNER
+    value: ensono
+  - name: REPOSITORY
+    value: stacks-infrastructure-aci
+  - name: ARTIFACTS_DIR
+    value: artifacts/
 
 
 
