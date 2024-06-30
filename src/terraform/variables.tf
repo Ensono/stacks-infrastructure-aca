@@ -97,7 +97,7 @@ variable "create_container_app" {
 }
 
 variable "container_app_name" {
-  type        = string
+  type = string
   # default     = "frontendtestapp"
   description = "The name of the Container App"
 }
