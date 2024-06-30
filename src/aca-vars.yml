@@ -18,16 +18,16 @@ variables:
 
 
   - name: container_registry_server
-    value: "satcontdevuksshared.azurecr.io"
+    value: "edstacnonproduksaca.azurecr.io"
   - name: registry_resoruce_group
-    value: "sat-cont-dev-uks-shared"
+    value: "ed-stacks-nonprod-uks-aca"
   - name: docker_build_args
     value: "src/app"
 
   - name: container_registry_name
-    value: "satcontdevuksshared"
+    value: "edstacnonproduksaca"
   - name: container_environment_name
-    value: "sat-cont-dev-uks-shared"
+    value: "ed-stacks-nonprod-uks-aca"
 
 
 
