@@ -9,19 +9,6 @@
 #############################################################################################################################
 name: "$(Build.SourceBranchName)-init"
 
-# pr:
-#   - master
-
-# # Define the triggers for when the build runs automatically
-# trigger:
-#   branches:
-#     include:
-#       - "master"
-#   paths:
-#     include:
-#       - "*"
-
-
 pr:
   branches:
     include:
@@ -72,14 +59,12 @@ parameters:
         dependsOn: Build
         condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')
         environment_shortname: nonprod
-        # domain_internal: $(base_domain_internal_nonprod)
         deployment_infra: InfraNonProd
         deployment_apps: ACANonProd
       - stage: Prod
         dependsOn: Build
         condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
         environment_shortname: prod
-        # domain_internal: $(base_domain_internal_prod)
         deployment_infra: InfraProd
         deployment_apps: ACAProd
 
@@ -92,10 +77,6 @@ variables:
   - template: infrastructure-aca-vars.yml
   - name: tf_state_key
     value: $(domain)_core
-  # - template: agent-config-vars.yml
-
-  # - name: CHEF_LICENSE
-  #   value: accept-silent
 
   # Versioning
   - name: version_major
@@ -106,8 +87,6 @@ variables:
     value: $[counter(join(variables['version_major'], join('-', variables['version_minor'])), 0)]
   - name: version_number
     value: "$(version_major).$(version_minor).$(version_revision)-$(Build.SourceBranchName)"
-  # - name: DOCKER_IMAGE_TAG
-  #   value: "$(version_number)"
 
 stages:
   - stage: Build
@@ -198,7 +177,6 @@ stages:
                         TF_VAR_name_company: $(company)
                         TF_VAR_name_project: $(project)
                         TF_VAR_name_component: $(domain)
-                        # TF_VAR_name_environment: ${{ stage.environment_shortname }}
                         TF_VAR_stage: ${{ stage.environment_shortname }}
                         TF_VAR_location: $(region)
 
