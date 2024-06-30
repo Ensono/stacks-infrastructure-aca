@@ -47,7 +47,7 @@ variables:
   - name: OWNER
     value: ensono
   - name: REPOSITORY
-    value: stacks-infrastructure-aci
+    value: stacks-infrastructure-aca
   - name: ARTIFACTS_DIR
     value: artifacts/
 
