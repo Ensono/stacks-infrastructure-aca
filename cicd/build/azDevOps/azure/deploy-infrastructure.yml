@@ -242,12 +242,12 @@ stages:
                     #         failTaskOnFailedTests: true
 
   - stage: Release
-    # dependsOn:
-    #   - ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
-    #       - NonProd
-    #   - ${{ else }}:
-    #       - Prod
-    # condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(${{ parameters.pre_release }}, true)))
+    dependsOn:
+      - ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+          - NonProd
+      - ${{ else }}:
+          - Prod
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(${{ parameters.pre_release }}, true)))
     variables:
       # TODO: Credentials should come from another group. `amido-stacks-github-credentials` are the old creds
       - group: amido-stacks-webapp
