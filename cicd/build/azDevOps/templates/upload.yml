@@ -1,5 +1,6 @@
 parameters:
-  contents: $(Build.SourcesDirectory)/deploy/terraform/azure/*.tfvars
+  - name: contents
+    default: '$(Build.SourcesDirectory)/deploy/terraform/azure/*.tfvars'
 
 steps:
   - task: CopyFiles@2
