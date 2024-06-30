@@ -200,4 +200,4 @@ stages:
                         TF_VAR_acae_name: $(container_environment_name)
                         TF_VAR_image_name: "$(container_registry_server)/$(appname)"
                         TF_VAR_image_tag: $(version_number)
-                        TF_VAR_container_app_name: $(appname)
+                        TF_VAR_container_app_name: $(container_app_name)

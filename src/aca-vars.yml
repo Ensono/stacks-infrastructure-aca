@@ -29,5 +29,10 @@ variables:
   - name: container_environment_name
     value: "ed-stacks-nonprod-uks-aca"
 
+  - name: container_app_name
+    value: "frontendapplication"
+
+    
+
 
 
