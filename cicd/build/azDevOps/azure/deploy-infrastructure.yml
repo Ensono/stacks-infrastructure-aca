@@ -201,10 +201,6 @@ stages:
                         # TF_VAR_name_environment: ${{ stage.environment_shortname }}
                         TF_VAR_stage: ${{ stage.environment_shortname }}
                         TF_VAR_location: $(region)
-                        # TF_VAR_resource_group_name: $(resource_group_name)
-                        # TF_VAR_create_acr: $(create_acr)
-                        # TF_VAR_acr_location: $(acr_location)
-                        # TF_VAR_acr_name: $(acr_name)
 
                     # Upload the Terraform variables file and the plan for debugging
                     - ${{ if eq(parameters.upload, true) }}:
