@@ -116,14 +116,14 @@ variable "workload_profiles" {
 
 }
 
-variable "acr_admin_enabled" {
-  type        = bool
-  default     = true
-  description = "A boolean flag indicating whether admin user should be enabled for the Azure Container Registry (ACR)."
-}
+# variable "acr_admin_enabled" {
+#   type        = bool
+#   default     = true
+#   description = "A boolean flag indicating whether admin user should be enabled for the Azure Container Registry (ACR)."
+# }
 
-variable "acr_sku" {
-  type        = string
-  default     = "Standard"
-  description = "The SKU (pricing tier) of the Azure Container Registry (ACR)."
-}
+# variable "acr_sku" {
+#   type        = string
+#   default     = "Standard"
+#   description = "The SKU (pricing tier) of the Azure Container Registry (ACR)."
+# }

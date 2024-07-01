@@ -64,6 +64,12 @@ variable "acr_name" {
   description = "Name of ACR"
 }
 
+variable "acr_rg" {
+  type = string
+  #  default     = "satacrtest" #"satacrtest" satcontdevuksshared
+  description = "RG of ACR"
+}
+
 variable "acae_name" {
   type = string
   #  default     = "sat-cont-dev-uks-shared"

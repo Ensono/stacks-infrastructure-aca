@@ -201,6 +201,7 @@ stages:
                         TF_VAR_stage: ${{ stage.environment_shortname }}
                         TF_VAR_location: $(region)
                         TF_VAR_acr_name:  $(container_registry_name)
+                        TF_VAR_acr_rg:  $(registry_resoruce_group)
                         TF_VAR_acae_name: $(container_environment_name)
                         TF_VAR_image_name: "$(container_registry_server)/$(appname)"
                         TF_VAR_image_tag: $(version_number)
