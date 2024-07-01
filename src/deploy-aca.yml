@@ -278,3 +278,37 @@ stages:
                     #     TF_VAR_image_name: "$(container_registry_server)/$(appname)"
                     #     TF_VAR_image_tag: $(version_number)
                     #     TF_VAR_container_app_name: $(container_app_name)
+
+  - stage: Release
+    dependsOn:
+      - ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+          - NonProd
+      - ${{ else }}:
+          - Prod
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(${{ parameters.pre_release }}, true)))
+    variables:
+      # TODO: Credentials should come from another group. `amido-stacks-github-credentials` are the old creds
+      - group: amido-stacks-github-credentials   #amido-stacks-webapp
+      - name: version_number
+        value: "$(version_major).$(version_minor).$(version_revision)"
+    jobs:
+      - job: CreateGitHubRelease
+        pool:
+          vmImage: $(pool_vm_image)
+        steps:
+          - template: ../cicd/build/azDevOps/templates/setup.yml
+            parameters:
+              TaskctlVersion: ${{ variables.TaskctlVersion }}
+
+          - task: Bash@3
+            displayName: Publish Release
+            inputs:
+              targetType: inline
+              script: |
+                taskctl release
+            env:
+              STAGE: "release"
+              PUBLISH_RELEASE: "true"
+              GITHUB_TOKEN: "$(API_KEY)"
+              ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+                PRERELEASE: "true"
