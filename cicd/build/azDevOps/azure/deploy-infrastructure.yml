@@ -276,8 +276,7 @@ stages:
             env:
               STAGE: "release"
               PUBLISH_RELEASE: "true"
-              # GITHUB_TOKEN: "$(GITHUB_TOKEN)"
-              API_KEY: $(API_KEY)
+              GITHUB_TOKEN: "$(API_KEY)"
               VERSION_NUMBER: $(version_number)
               ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
                 PRERELEASE: "true"
