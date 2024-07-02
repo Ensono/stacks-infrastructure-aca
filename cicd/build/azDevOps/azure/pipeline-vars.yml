@@ -62,3 +62,7 @@ variables:
   # Set the name of the cloud platform
   - name: CLOUD_PLATFORM
     value: azure
+
+
+  - name: resource_group_name
+    value: ed-stacks-nonprod-uks-aca
