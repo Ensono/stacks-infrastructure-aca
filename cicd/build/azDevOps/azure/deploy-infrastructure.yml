@@ -255,10 +255,10 @@ stages:
                             TF_VAR_location: $(region)
                             TF_VAR_resource_group_name: $(resource_group_name)
 
-                            AZURE_CLIENT_ID: $(ARM_CLIENT_ID)
+                            AZURE_CLIENT_ID: $(azure-client-id)
                             AZURE_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
-                            AZURE_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-                            AZURE_TENANT_ID: $(ARM_TENANT_ID)
+                            AZURE_SUBSCRIPTION_ID: $(azure-subscription-id)
+                            AZURE_TENANT_ID: $(azure-tenant-id)
 
 
 
