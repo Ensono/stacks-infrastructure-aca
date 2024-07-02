@@ -113,8 +113,8 @@ tasks:
     description: Ensure all necessary plugins and providers are installed
     command:
       - |
-       Write-Information "Current working directory: $(Get-Location)" 
-       Invoke-Inspec -vendor -args "--overwrite"
+        Write-Information "Current working directory: $(Get-Location)" 
+        Invoke-Inspec -vendor -args "--overwrite"
 
   tests:infra:run:
     context: infratests
