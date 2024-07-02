@@ -148,7 +148,7 @@ stages:
               REPORT_FILENAME: inspec_azure_aca.xml
 
               TF_FILE_LOCATION: /app/deploy/terraform/azure
-              TF_VAR_name_environment: ${{ stage.environment_shortname }}
+              TF_VAR_name_environment: test
               TF_VAR_location: $(region)
               TF_VAR_resource_group_name: $(resource_group_name)
 
