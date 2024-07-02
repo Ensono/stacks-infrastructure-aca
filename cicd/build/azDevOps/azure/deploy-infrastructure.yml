@@ -224,44 +224,44 @@ stages:
                             ARM_CLIENT_SECRET: $(azure-client-secret)
 
                     # Perform infrastructure tests
-                    - ${{ if eq(parameters.deploy, true) }}:
-                        - template: ../templates/infra-tests.yml
-                          parameters:
-                            CHEF_LICENSE: $(CHEF_LICENSE)
-                            TESTS_PATH: /app/deploy/tests
-                            REPORT_FILENAME: inspec_azure_aca.xml
-                            TF_FILE_LOCATION: /app/deploy/terraform/azure
-                            TF_VAR_name_environment: ${{ stage.environment_shortname }}
-                            TF_VAR_region: $(region)
-                            TF_VAR_resource_group_name: $(resource_group_name)
                     # - ${{ if eq(parameters.deploy, true) }}:
-                    #     - task: Bash@3
-                    #       displayName: "TackCTL: Tests"
-                    #       inputs:
-                    #         targetType: inline
-                    #         # script: taskctl tests
-                    #         script: |
-                    #           taskctl tests
-                    #       env:
-                    #         INSPEC_FILES : /app/deploy/tests
+                    #     - template: ../templates/infra-tests.yml
+                    #       parameters:
                     #         CHEF_LICENSE: $(CHEF_LICENSE)
-                    #         # INSPEC_ARGS: 
-                    #         INSPEC_OUTPUT_PATH: /app/outputs/tests
+                    #         TESTS_PATH: /app/deploy/tests
                     #         REPORT_FILENAME: inspec_azure_aca.xml
-                    #         CLOUD_PLATFORM: $(CLOUD_PLATFORM)
-                            
-
                     #         TF_FILE_LOCATION: /app/deploy/terraform/azure
                     #         TF_VAR_name_environment: ${{ stage.environment_shortname }}
-                    #         TF_VAR_location: $(region)
+                    #         TF_VAR_region: $(region)
                     #         TF_VAR_resource_group_name: $(resource_group_name)
+                    - ${{ if eq(parameters.deploy, true) }}:
+                        - task: Bash@3
+                          displayName: "TackCTL: Tests"
+                          inputs:
+                            targetType: inline
+                            # script: taskctl tests
+                            script: |
+                              taskctl tests
+                          env:
+                            INSPEC_FILES: /app/deploy/tests
+                            CHEF_LICENSE: $(CHEF_LICENSE)
+                            # INSPEC_ARGS: 
+                            INSPEC_OUTPUT_PATH: /app/outputs/tests
+                            REPORT_FILENAME: inspec_azure_aca.xml
+                            CLOUD_PLATFORM: $(CLOUD_PLATFORM)
+                            
 
-                    #         # Ensure that the env vars are set for access
-                    #         # The following are the env vars that Inspec requires for authentication with Azure
-                    #         AZURE_CLIENT_ID: $(ARM_CLIENT_ID)
-                    #         AZURE_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
-                    #         AZURE_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-                    #         AZURE_TENANT_ID: $(ARM_TENANT_ID)
+                            TF_FILE_LOCATION: /app/deploy/terraform/azure
+                            TF_VAR_name_environment: ${{ stage.environment_shortname }}
+                            TF_VAR_location: $(region)
+                            TF_VAR_resource_group_name: $(resource_group_name)
+
+                            # Ensure that the env vars are set for access
+                            # The following are the env vars that Inspec requires for authentication with Azure
+                            AZURE_CLIENT_ID: $(ARM_CLIENT_ID)
+                            AZURE_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+                            AZURE_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+                            AZURE_TENANT_ID: $(ARM_TENANT_ID)
 
 
 
