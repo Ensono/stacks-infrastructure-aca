@@ -25,7 +25,7 @@ steps:
       TF_FILE_LOCATION: ${{ parameters.tf_file_location }}
       TF_VAR_name_environment: ${{ parameters.tf_var_name_environment }}
       TF_VAR_location: $(location)
-      TF_VAR_resource_group_name: $(resource_group_name)
+      # TF_VAR_resource_group_name: $(resource_group_name)
 
       # Ensure that the env vars are set for access
       # The following are the env vars that Inspec requires for authentication with Azure
