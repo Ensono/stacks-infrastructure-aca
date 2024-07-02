@@ -5,7 +5,7 @@ copyright: Ensono Digital
 copyright_email: stacks@ensono.com
 license: Apache-2.0
 summary: |
-  A profile to test that the infrastructure for ACI has been setup as expected
+  A profile to test that the infrastructure for ACA has been setup as expected
 version: 0.1.0
 inspec_version: ">= 2.2.7"
 depends:

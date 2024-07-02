@@ -243,7 +243,7 @@ stages:
                             targetType: inline
                             script: taskctl tests
                           env:
-                            TESTS_PATH: /app/deploy/terraform/tests
+                            INSPEC_FILES : /app/deploy/terraform/tests
                             CHEF_LICENSE: $(CHEF_LICENSE)
                             INSPEC_ARGS: 
                             INSPEC_OUTPUT_PATH: /app/outputs/tests
