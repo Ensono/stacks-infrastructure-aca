@@ -113,6 +113,7 @@ tasks:
     description: Ensure all necessary plugins and providers are installed
     command:
       - |
+       Get-ChildItem -Path /app
        $env:INSPEC_FILES="/app/deploy/tests"
        Invoke-Inspec -vendor -args "--overwrite"
 
