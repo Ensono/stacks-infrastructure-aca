@@ -245,7 +245,7 @@ stages:
                           env:
                             INSPEC_FILES : /app/deploy/tests
                             CHEF_LICENSE: $(CHEF_LICENSE)
-                            INSPEC_ARGS: 
+                            # INSPEC_ARGS: 
                             INSPEC_OUTPUT_PATH: /app/outputs/tests
                             REPORT_FILENAME: inspec_azure_aca.xml
 
