@@ -69,3 +69,9 @@ pipelines:
 
   setup:
     - task: build:number
+
+  # setup:
+  #   - task: debug:env
+  #   - task: buildnumber
+  #     depends_on:
+  #       - debug:env

@@ -158,3 +158,11 @@ tasks:
     description: debugs env vars
     command:
       - Get-ChildItem env:/
+
+  debug:sleep:
+    context: powershell
+    command:
+      - echo "Sleeping for {{ .sleep }}"
+      - sleep {{ .sleep }}
+    variables:
+      sleep: 30
