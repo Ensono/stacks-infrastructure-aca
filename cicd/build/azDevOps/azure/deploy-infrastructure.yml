@@ -241,7 +241,11 @@ stages:
                           displayName: "TackCTL: Tests"
                           inputs:
                             targetType: inline
-                            script: taskctl tests
+                            # script: taskctl tests
+                            script: |
+                              echo "INSPEC_FILES: $INSPEC_FILES"
+                              ls -la $INSPEC_FILES
+                              taskctl tests
                           env:
                             INSPEC_FILES : /app/deploy/tests
                             CHEF_LICENSE: $(CHEF_LICENSE)
