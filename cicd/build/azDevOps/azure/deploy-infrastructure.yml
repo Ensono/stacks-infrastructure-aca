@@ -200,10 +200,10 @@ stages:
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_DESTROY_PLAN: "-input=false,-out=\"destroy\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
-                            ARM_TENANT_ID: $(azure-tenant-id)
-                            ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            ARM_CLIENT_ID: $(azure-client-id)
-                            ARM_CLIENT_SECRET: $(azure-client-secret)
+                            # ARM_TENANT_ID: $(azure-tenant-id)
+                            # ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
+                            # ARM_CLIENT_ID: $(azure-client-id)
+                            # ARM_CLIENT_SECRET: $(azure-client-secret)
 
                     # Create the resources
                     - ${{ if eq(parameters.deploy, true) }}:
@@ -218,10 +218,10 @@ stages:
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_PLAN: "-input=false,-out=\"tfplan\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
-                            ARM_TENANT_ID: $(azure-tenant-id)
-                            ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            ARM_CLIENT_ID: $(azure-client-id)
-                            ARM_CLIENT_SECRET: $(azure-client-secret)
+                            # ARM_TENANT_ID: $(azure-tenant-id)
+                            # ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
+                            # ARM_CLIENT_ID: $(azure-client-id)
+                            # ARM_CLIENT_SECRET: $(azure-client-secret)
 
                     # Perform infrastructure tests
                     # - ${{ if eq(parameters.deploy, true) }}:
@@ -255,10 +255,10 @@ stages:
                             TF_VAR_location: $(region)
                             TF_VAR_resource_group_name: $(resource_group_name)
 
-                            AZURE_CLIENT_ID: $(azure-client-id)
-                            AZURE_CLIENT_SECRET: $(azure-client-secret)
-                            AZURE_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            AZURE_TENANT_ID: $(azure-tenant-id)
+                            # AZURE_CLIENT_ID: $(azure-client-id)
+                            # AZURE_CLIENT_SECRET: $(azure-client-secret)
+                            # AZURE_SUBSCRIPTION_ID: $(azure-subscription-id)
+                            # AZURE_TENANT_ID: $(azure-tenant-id)
 
 
 
