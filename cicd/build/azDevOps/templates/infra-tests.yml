@@ -1,5 +1,5 @@
 parameters:
-  TESTS_PATH:
+  INSPEC_FILES:
   INSPEC_ARGS:
   INSPEC_OUTPUT_PATH: /app/outputs/tests
   CHEF_LICENSE:
@@ -16,7 +16,7 @@ steps:
       targetType: inline
       script: taskctl tests
     env:
-      TESTS_PATH: ${{ parameters.tests_path }}
+      INSPEC_FILES: ${{ parameters.inspec_files }}
       CHEF_LICENSE: ${{ parameters.chef_license }}
       INSPEC_ARGS: ${{ parameters.inspec_args }}
       INSPEC_OUTPUT_PATH: ${{ parameters.inspec_output_path }}
