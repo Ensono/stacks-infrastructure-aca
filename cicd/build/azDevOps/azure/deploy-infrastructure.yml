@@ -225,7 +225,7 @@ stages:
 
                     # Perform infrastructure tests
                     - ${{ if eq(parameters.deploy, true) }}:
-                        - template: templates/infra-tests.yml
+                        - template: ../templates/infra-tests.yml
                           parameters:
                             CHEF_LICENSE: $(CHEF_LICENSE)
                             TESTS_PATH: /app/deploy/tests
