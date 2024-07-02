@@ -27,7 +27,7 @@ variables:
   - name: container_registry_name
     value: "amidostacksnonprodeuwcore"
   - name: container_environment_name
-    value: "ed-stacks-nonprod-uks-aca"
+    value: "ed-demo1-nonprod-uks-aca"
 
   - name: container_app_name
     value: "frontendapplication"

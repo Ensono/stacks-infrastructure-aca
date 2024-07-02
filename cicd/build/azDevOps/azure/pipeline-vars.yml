@@ -11,12 +11,12 @@ variables:
 
   # name of the project
   - name: project
-    value: stacks
+    value: demo1
 
   # which domain fo the company is this. e.g. core resources, or front end
   # This is not a network domain
   - name: domain
-    value: demo1
+    value: aca
 
   # -------- Terraform remote state
   # Stacks operates Terraform states based on workspaces **IT IS VERY IMPORTANT** that you ensure a unique name for each application definition
