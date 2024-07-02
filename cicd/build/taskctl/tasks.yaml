@@ -114,7 +114,7 @@ tasks:
     command:
       - |
         Write-Information "Current working directory: $(Get-Location)" 
-        Invoke-Inspec -vendor -args "--overwrite"
+        Invoke-Inspec -vendor -path $env:INSPEC_FILES -args "--overwrite"
 
   tests:infra:run:
     context: infratests
