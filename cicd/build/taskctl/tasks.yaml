@@ -137,7 +137,7 @@ tasks:
         Invoke-Terraform -Workspace -Arguments $env:TF_VAR_name_environment -Path $env:TF_FILE_LOCATION
         Invoke-Terraform -Output -Path $env:TF_FILE_LOCATION | /app/cicd/build/scripts/Set-EnvironmentVars.ps1 -prefix "TFOUT" -key "value" -passthru | ConvertTo-Yaml | Out-File -Path ${PWD}/inspec_inputs.yml
         Add-Content -Path ${PWD}/inspec_inputs.yml -Value "location: ${env:TF_VAR_location}"
-        Invoke-Inspec -execute -ExitCodes 101 -arguments "--input-file ${PWD}/inspec_inputs.yml" -path $env:INSPEC_FILES
+        Invoke-Inspec -execute -arguments "--input-file ${PWD}/inspec_inputs.yml" -path $env:INSPEC_FILES
 
   _docs:
     description: Build Docs for ACI
