@@ -64,5 +64,5 @@ variables:
     value: azure
 
 
-  - name: resource_group_name
-    value: ed-stacks-nonprod-uks-aca
+  # - name: resource_group_name
+  #   value: ed-stacks-nonprod-uks-aca
