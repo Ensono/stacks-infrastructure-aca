@@ -115,7 +115,7 @@ tasks:
       - |
        Get-ChildItem -Path /app/deploy/tests
        $env:INSPEC_FILES="/app/deploy/tests"
-       Invoke-Inspec -vendor -args "--overwrite"
+       Invoke-Inspec -vendor -path $env:INSPEC_FILES -args "--overwrite"
 
   tests:infra:run:
     context: infratests
