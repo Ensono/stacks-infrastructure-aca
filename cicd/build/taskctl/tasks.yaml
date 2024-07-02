@@ -113,9 +113,7 @@ tasks:
     description: Ensure all necessary plugins and providers are installed
     command:
       - |
-       Get-ChildItem -Path /app/deploy/tests
-       $env:INSPEC_FILES="/app/deploy/tests"
-       Invoke-Inspec -vendor -path $env:INSPEC_FILES -args "--overwrite"
+        Invoke-Inspec -vendor -path $env:INSPEC_FILES -args "--overwrite"
 
   tests:infra:run:
     context: infratests
@@ -129,7 +127,7 @@ tasks:
         Set-Content -Path "${PWD}/inspec_inputs.yml" -Value ""
         Add-Content -Path ${PWD}/inspec_inputs.yml -Value "resource_group_name: ${env:TF_VAR_resource_group_name}"
         Add-Content -Path ${PWD}/inspec_inputs.yml -Value "location: ${env:TF_VAR_location}"
-        Invoke-Inspec -execute -arguments "--input-file ${PWD}/inspec_inputs.yml"
+        Invoke-Inspec -execute -arguments "--input-file ${PWD}/inspec_inputs.yml" -path $env:INSPEC_FILES
 
   _docs:
     description: Build Docs for ACI
