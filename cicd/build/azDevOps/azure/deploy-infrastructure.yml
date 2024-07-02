@@ -241,10 +241,6 @@ stages:
                             targetType: inline
                             # script: taskctl tests
                             script: |
-                              echo "INSPEC_FILES: $INSPEC_FILES"
-                              ls -la $INSPEC_FILES
-                              echo "TF_FILE_LOCATION: $TF_FILE_LOCATION"
-                              ls -la $TF_FILE_LOCATION
                               taskctl tests
                           env:
                             INSPEC_FILES : /app/deploy/tests
@@ -252,6 +248,8 @@ stages:
                             # INSPEC_ARGS: 
                             INSPEC_OUTPUT_PATH: /app/outputs/tests
                             REPORT_FILENAME: inspec_azure_aca.xml
+                            CLOUD_PLATFORM: $(CLOUD_PLATFORM)
+                            
 
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
