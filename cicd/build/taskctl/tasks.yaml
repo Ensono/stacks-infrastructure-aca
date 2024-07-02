@@ -112,7 +112,8 @@ tasks:
     context: infratests
     description: Ensure all necessary plugins and providers are installed
     command:
-      - 
+      - |
+       $env:INSPEC_FILES= /app/deploy/tests
        Invoke-Inspec -vendor -args "--overwrite"
 
   tests:infra:run:
