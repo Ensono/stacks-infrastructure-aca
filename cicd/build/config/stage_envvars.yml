@@ -14,7 +14,7 @@ default:
       - name: AWS_REGION
 
 stages:
-  - name: stacks-aci
+  - name: stacks-aca
     variables:
       - name: TF_FILE_LOCATION
         description: Path to the Terraform template files
