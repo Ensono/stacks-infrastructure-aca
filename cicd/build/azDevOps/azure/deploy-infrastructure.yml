@@ -134,12 +134,7 @@ stages:
             inputs:
               targetType: inline
               # script: taskctl tests
-              script: |
-                echo "INSPEC_FILES: $INSPEC_FILES"
-                ls -la $INSPEC_FILES
-                echo "TF_FILE_LOCATION: $TF_FILE_LOCATION"
-                ls -la $TF_FILE_LOCATION
-                taskctl tests
+              script: taskctl tests
             env:
               INSPEC_FILES : /app/deploy/tests
               CHEF_LICENSE: $(CHEF_LICENSE)
