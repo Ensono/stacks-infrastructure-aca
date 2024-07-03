@@ -91,7 +91,7 @@ variables:
   - name: version_revision
     value: $[counter(join(variables['version_major'], join('-', variables['version_minor'])), 0)]
   - name: version_number
-    value: "$(version_major).$(version_minor).$(version_revision)-$(Build.SourceBranchName)"
+    value: "$(version_major).$(version_minor).$(version_revision)-${{ lower(variables['Build.SourceBranchName']) }}"
 
 stages:
   - stage: Build
