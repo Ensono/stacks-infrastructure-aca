@@ -51,6 +51,10 @@ parameters:
     displayName: Create a pre-release from feature branch
     type: boolean
     default: false
+  - name: run_docs
+    displayName: Run Docs Tasks?
+    type: boolean
+    default: false
 
   - name: stages
     type: object
@@ -112,14 +116,6 @@ stages:
             env:
               DOCKER_IMAGE_TAG: $(version_number)
 
-          # lint files in the repo
-          # - task: Bash@3
-          #   displayName: Lint
-          #   inputs:
-          #     targetType: inline
-          #     script: |
-          #       taskctl lint
-
           - task: Bash@3
             displayName: "TaskCTL: Lint"
             inputs:
@@ -129,20 +125,23 @@ stages:
               TF_FILE_LOCATION: /app/$(self_repo_tf_src)
               CLOUD_PLATFORM: "$(cloud_platform)"
 
-          # # Create the documentation for the repo
-          # - task: Bash@3
-          #   displayName: Documentation
-          #   inputs:
-          #     targetType: inline
-          #     script: |
-          #       taskctl docs
+          # Create the documentation for the repo
+          - ${{ if eq(parameters.run_docs, true) }}:
+            - task: Bash@3
+              displayName: Documentation
+              inputs:
+                targetType: inline
+                script: |
+                  taskctl docs
 
-          # # Upload the documentation as a build artifact
-          # - task: PublishBuildArtifacts@1
-          #   displayName: Publish Documentation
-          #   inputs:
-          #     pathToPublish: $(Build.SourcesDirectory)/outputs/docs
-          #     artifactName: docs
+          # Upload the documentation as a build artifact
+          - ${{ if eq(parameters.run_docs, true) }}:
+            - task: PublishBuildArtifacts@1
+              displayName: Publish Documentation
+              inputs:
+                pathToPublish: $(Build.SourcesDirectory)/outputs/docs
+                artifactName: docs
+
 
   # Called Non-Prod instead of Dev as all Non-Production stages will deploy to here
   - ${{ each stage in parameters.stages }}:
@@ -207,10 +206,7 @@ stages:
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_DESTROY_PLAN: "-input=false,-out=\"destroy\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
-                            # ARM_TENANT_ID: $(azure-tenant-id)
-                            # ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            # ARM_CLIENT_ID: $(azure-client-id)
-                            # ARM_CLIENT_SECRET: $(azure-client-secret)
+
 
                     # Create the resources
                     - ${{ if eq(parameters.deploy, true) }}:
@@ -225,10 +221,7 @@ stages:
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_PLAN: "-input=false,-out=\"tfplan\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
-                            # ARM_TENANT_ID: $(azure-tenant-id)
-                            # ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            # ARM_CLIENT_ID: $(azure-client-id)
-                            # ARM_CLIENT_SECRET: $(azure-client-secret)
+
 
                     # Perform infrastructure tests
                     - ${{ if eq(parameters.deploy, true) }}:
@@ -262,10 +255,10 @@ stages:
                     #         TF_VAR_location: $(region)
                     #         TF_VAR_resource_group_name: $(resource_group_name)
 
-                            # AZURE_CLIENT_ID: $(azure-client-id)
-                            # AZURE_CLIENT_SECRET: $(azure-client-secret)
-                            # AZURE_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            # AZURE_TENANT_ID: $(azure-tenant-id)
+                    #         AZURE_CLIENT_ID: $(azure-client-id)
+                    #         AZURE_CLIENT_SECRET: $(azure-client-secret)
+                    #         AZURE_SUBSCRIPTION_ID: $(azure-subscription-id)
+                    #         AZURE_TENANT_ID: $(azure-tenant-id)
 
 
 
@@ -285,7 +278,6 @@ stages:
           - Prod
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(${{ parameters.pre_release }}, true)))
     variables:
-      # TODO: Credentials should come from another group. `amido-stacks-github-credentials` are the old creds
       - group: amido-stacks-github-credentials   #amido-stacks-webapp
       - name: version_number
         value: "$(version_major).$(version_minor).$(version_revision)"
