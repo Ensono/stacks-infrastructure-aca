@@ -138,7 +138,7 @@ stages:
         condition: and(succeeded(), or(${{ stage.condition }}, ${{ parameters.force_deploy }}))
         variables:
           # Pull in the non-production credentials for the build to use
-          - group: stacks-credentials-nonprod-kv #ensono-sp-creds
+          - group: ensono-sp-creds #stacks-credentials-nonprod-kv #ensono-sp-creds
         jobs:
           - deployment: ${{ stage.deployment_apps }}
             environment: ${{ variables.domain }}-${{ stage.environment_shortname }}
@@ -166,11 +166,11 @@ stages:
                         TASKCTL_DEBUG: ${{ lower(parameters.debug) }}
                         TF_FILE_LOCATION: /app/src/terraform
                         CLOUD_PLATFORM: "$(cloud_platform)"
-                        ARM_TENANT_ID: $(azure-tenant-id)
-                        ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                        ARM_CLIENT_ID: $(azure-client-id)
-                        ARM_CLIENT_SECRET: $(azure-client-secret)
-                        ENV_NAME: ${{ stage.environment_shortname }}
+                        # ARM_TENANT_ID: $(azure-tenant-id)
+                        # ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
+                        # ARM_CLIENT_ID: $(azure-client-id)
+                        # ARM_CLIENT_SECRET: $(azure-client-secret)
+                        # ENV_NAME: ${{ stage.environment_shortname }}
                         TF_BACKEND_INIT: "key=$(tf_state_key),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg),container_name=$(tf_state_container)"
 
                         TF_VAR_name_company: $(company)
@@ -206,10 +206,10 @@ stages:
                             TF_BACKEND_DESTROY_PLAN: "-input=false,-out=\"destroy\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
                             CLOUD_PLATFORM: "$(cloud_platform)"
-                            ARM_TENANT_ID: $(azure-tenant-id)
-                            ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            ARM_CLIENT_ID: $(azure-client-id)
-                            ARM_CLIENT_SECRET: $(azure-client-secret)
+                            # ARM_TENANT_ID: $(azure-tenant-id)
+                            # ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
+                            # ARM_CLIENT_ID: $(azure-client-id)
+                            # ARM_CLIENT_SECRET: $(azure-client-secret)
 
                     # Create the container app
                     - ${{ if eq(parameters.deploy, true) }}:
@@ -225,10 +225,10 @@ stages:
                             TF_BACKEND_PLAN: "-input=false,-out=\"tfplan\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
                             CLOUD_PLATFORM: "$(cloud_platform)"
-                            ARM_TENANT_ID: $(azure-tenant-id)
-                            ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            ARM_CLIENT_ID: $(azure-client-id)
-                            ARM_CLIENT_SECRET: $(azure-client-secret)
+                            # ARM_TENANT_ID: $(azure-tenant-id)
+                            # ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
+                            # ARM_CLIENT_ID: $(azure-client-id)
+                            # ARM_CLIENT_SECRET: $(azure-client-secret)
 
   - stage: Release
     dependsOn:
