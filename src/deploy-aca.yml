@@ -46,14 +46,12 @@ parameters:
         dependsOn: Build
         condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')
         environment_shortname: nonprod
-        # domain_internal: $(base_domain_internal_nonprod)
         deployment_infra: InfraNonProd
         deployment_apps: ACANonProd
       - stage: Prod
         dependsOn: Build
         condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
         environment_shortname: prod
-        # domain_internal: $(base_domain_internal_prod)
         deployment_infra: InfraProd
         deployment_apps: ACAProd
 
@@ -69,10 +67,6 @@ variables:
     value: "frontendapp"
   - name: tf_state_key
     value: $(domain)_$(appname)
-  # - template: agent-config-vars.yml
-
-  # - name: CHEF_LICENSE
-  #   value: accept-silent
 
   # Versioning
   - name: version_major
@@ -83,8 +77,6 @@ variables:
     value: $[counter(join(variables['version_major'], join('-', variables['version_minor'])), 0)]
   - name: version_number
     value: "$(version_major).$(version_minor).$(version_revision)-${{ lower(variables['Build.SourceBranchName']) }}"
-  # - name: DOCKER_IMAGE_TAG
-  #   value: "$(version_number)"
 
 stages:
   - stage: Build
@@ -136,21 +128,6 @@ stages:
               DOCKER_IMAGE_NAME: $(appname)
               DOCKER_BUILD_ARGS: $(docker_build_args)
               DOCKER_IMAGE_TAG: $(version_number)
-
-          # # Create the documentation for the repo
-          # - task: Bash@3
-          #   displayName: Documentation
-          #   inputs:
-          #     targetType: inline
-          #     script: |
-          #       taskctl docs
-
-          # # Upload the documentation as a build artifact
-          # - task: PublishBuildArtifacts@1
-          #   displayName: Publish Documentation
-          #   inputs:
-          #     pathToPublish: $(Build.SourcesDirectory)/outputs/docs
-          #     artifactName: docs
 
   # Called Non-Prod instead of Dev as all Non-Production stages will deploy to here
   - ${{ each stage in parameters.stages }}:
@@ -250,34 +227,6 @@ stages:
                             ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
                             ARM_CLIENT_ID: $(azure-client-id)
                             ARM_CLIENT_SECRET: $(azure-client-secret)
-
-                    # - task: Bash@3
-                    #   displayName: "TaskCTL: infrastructure"
-                    #   inputs:
-                    #     targetType: inline
-                    #     script: taskctl infrastructure
-                    #   env:
-                    #     TASKCTL_DEBUG: ${{ lower(parameters.debug) }}
-                    #     CLOUD_PLATFORM: "$(cloud_platform)"
-                    #     ARM_TENANT_ID: $(azure-tenant-id)
-                    #     ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                    #     ARM_CLIENT_ID: $(azure-client-id)
-                    #     ARM_CLIENT_SECRET: $(azure-client-secret)
-                    #     ENV_NAME: ${{ stage.environment_shortname }}
-                    #     TF_BACKEND_INIT: "key=$(tf_state_key),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg),container_name=$(tf_state_container)"
-                    #     TF_FILE_LOCATION: /app/src/terraform
-
-                    #     TF_VAR_name_company: $(company)
-                    #     TF_VAR_name_project: $(project)
-                    #     TF_VAR_name_component: $(domain)
-                    #     TF_VAR_name_environment: ${{ stage.environment_shortname }}
-                    #     TF_VAR_stage: ${{ stage.environment_shortname }}
-                    #     TF_VAR_location: $(region)
-                    #     TF_VAR_acr_name:  $(container_registry_name)
-                    #     TF_VAR_acae_name: $(container_environment_name)
-                    #     TF_VAR_image_name: "$(container_registry_server)/$(appname)"
-                    #     TF_VAR_image_tag: $(version_number)
-                    #     TF_VAR_container_app_name: $(container_app_name)
 
   - stage: Release
     dependsOn:

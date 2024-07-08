@@ -81,8 +81,6 @@ variables:
   - name: tf_state_key
     value: $(domain)_core
 
-  # - template: agent-config-vars.yml
-
   - name: CHEF_LICENSE
     value: accept-silent
 
