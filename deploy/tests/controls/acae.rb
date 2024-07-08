@@ -3,16 +3,26 @@
 
 title "Azure Container App Environment"
 
-# Ensure that the Azure Container App Environment exists, is in the correct location and
-# has been provisionned successfully
-describe azure_generic_resource(resource_group: input("rg_name"), name: input("acae_name"), resource_type: 'Microsoft.App/managedEnvironments') do
-  it { should exist }
-  its('type') { should cmp 'Microsoft.App/managedEnvironments' }
-  its('name') { should cmp acae_name }
-  its('location') { should cmp input("location").downcase }
-  its('properties.provisioningState') { should cmp 'Succeeded' }
+# Get all resources that match the criteria
+resources = azure_generic_resources(resource_group: input("rg_name"), name: input("acae_name"))
 
-  # Check if it's associated with a Log Analytics workspace
-  its('properties.appLogsConfiguration.destination') { should cmp 'log-analytics' }
-  its('properties.appLogsConfiguration.logAnalyticsConfiguration.customerId') { should_not be_nil }
+# Filter for the Container App Environment
+acae_resource = resources.where(type: 'Microsoft.App/managedEnvironments').entries.first
+
+# Now test the specific resource
+describe acae_resource do
+  it { should_not be_nil }
+  
+  if acae_resource.nil?
+    skip "No Azure Container App Environment found matching the criteria"
+  else
+    it { should exist }
+    its("location") { should cmp input("location").downcase }
+    its("properties.provisioningState") { should cmp "Succeeded" }
+    its('type') { should cmp 'Microsoft.App/managedEnvironments' }
+
+    # Check if it's associated with a Log Analytics workspace
+    its('properties.appLogsConfiguration.destination') { should cmp 'log-analytics' }
+    its('properties.appLogsConfiguration.logAnalyticsConfiguration.customerId') { should_not be_nil }
+  end
 end
