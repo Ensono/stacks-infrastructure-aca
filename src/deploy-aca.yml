@@ -65,6 +65,10 @@ variables:
   - template: aca-vars.yml
   - name: appname
     value: "frontendapp"
+  - name: docker_build_args
+    value: "src/app"
+  - name: container_app_name
+    value: "frontendapplication"
   - name: tf_state_key
     value: $(domain)_$(appname)
 
@@ -115,8 +119,6 @@ stages:
               script: |
                 taskctl build:container
             env:
-
-              SELF_REPO_SRC: src/app
               CLOUD_PROVIDER: "$(cloud_platform)" #$(cloud_provider) # Azure
               ARM_TENANT_ID: $(azure-tenant-id)
               ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
