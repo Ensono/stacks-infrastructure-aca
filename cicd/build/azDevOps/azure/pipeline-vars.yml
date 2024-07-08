@@ -64,5 +64,3 @@ variables:
   - name: team_owner
     value: plateng
 
-  - name: self_repo_tf_src
-    value: deploy/terraform/azure

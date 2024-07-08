@@ -119,7 +119,7 @@ stages:
               targetType: inline
               script: taskctl lint
             env:
-              TF_FILE_LOCATION: /app/$(self_repo_tf_src)
+              TF_FILE_LOCATION: /app/deploy/terraform/azure
               CLOUD_PLATFORM: "$(cloud_platform)"
 
           # Create the documentation for the repo
@@ -179,7 +179,7 @@ stages:
                           taskctl infra:vars
                       env:
                         TASKCTL_DEBUG: ${{ lower(parameters.debug) }}
-                        TF_FILE_LOCATION: /app/$(self_repo_tf_src)
+                        TF_FILE_LOCATION: /app/deploy/terraform/azure
                         TF_VAR_name_company: $(company)
                         TF_VAR_name_project: $(project)
                         TF_VAR_name_component: $(domain)
@@ -199,7 +199,7 @@ stages:
                             script: |
                               taskctl infrastructure_destroy
                           env:
-                            TF_FILE_LOCATION: /app/$(self_repo_tf_src)
+                            TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_DESTROY_PLAN: "-input=false,-out=\"destroy\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
@@ -214,7 +214,7 @@ stages:
                             script: |
                               taskctl infrastructure
                           env:
-                            TF_FILE_LOCATION: /app/$(self_repo_tf_src)
+                            TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_PLAN: "-input=false,-out=\"tfplan\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
@@ -227,7 +227,7 @@ stages:
                             CHEF_LICENSE: $(CHEF_LICENSE)
                             INSPEC_FILES: /app/deploy/tests
                             REPORT_FILENAME: inspec_azure_aca.xml
-                            TF_FILE_LOCATION: /app/$(self_repo_tf_src)
+                            TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
                             TF_VAR_location: $(region)
 
