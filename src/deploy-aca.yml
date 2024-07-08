@@ -85,7 +85,7 @@ variables:
 stages:
   - stage: Build
     variables:
-      - group: azure-sp-creds #stacks-credentials-nonprod-kv
+      - group: ensono-sp-creds #stacks-credentials-nonprod-kv
     jobs:
       - job: Build
         pool:

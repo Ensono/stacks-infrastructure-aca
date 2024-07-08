@@ -147,7 +147,7 @@ stages:
         condition: and(succeeded(), or(${{ stage.condition }}, ${{ parameters.force_deploy }}))
         variables:
           # Pull in the non-production credentials for the build to use
-          - group: azure-sp-creds #stacks-credentials-nonprod-kv #ensono-sp-creds
+          - group: ensono-sp-creds #stacks-credentials-nonprod-kv #ensono-sp-creds
         jobs:
           - deployment: ${{ stage.deployment_infra }}
             environment: ${{ variables.domain }}-${{ stage.environment_shortname }}
