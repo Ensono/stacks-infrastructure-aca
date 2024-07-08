@@ -240,7 +240,7 @@ stages:
           - Prod
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(${{ parameters.pre_release }}, true)))
     variables:
-      - group: amido-stacks-github-credentials   #amido-stacks-webapp
+      - group: github-creds   #amido-stacks-webapp
       - name: version_number
         value: "$(version_major).$(version_minor).$(version_revision)"
     jobs:
