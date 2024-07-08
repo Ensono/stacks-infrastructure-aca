@@ -3,16 +3,16 @@
 
 title "Azure Container App Environment"
 
-# Ensure that the resource group exists, is in the correct location and
+# Ensure that the Azure Container App Environment exists, is in the correct location and
 # has been provisionned successfully
-describe azure_generic_resource(resource_group: input("rg_name"), name: input("acae_name")) do
+describe azure_generic_resource(resource_group: input("rg_name"), name: input("acae_name"), resource_type: 'Microsoft.App/managedEnvironments') do
   it { should exist }
-  its("location") { should cmp input("location") }
-  its("properties.provisioningState") { should cmp "Succeeded" }
   its('type') { should cmp 'Microsoft.App/managedEnvironments' }
+  its('name') { should cmp acae_name }
+  its('location') { should cmp input("location").downcase }
   its('properties.provisioningState') { should cmp 'Succeeded' }
 
-   # Check if it's associated with a Log Analytics workspace
-   its('properties.appLogsConfiguration.destination') { should cmp 'log-analytics' }
-   its('properties.appLogsConfiguration.logAnalyticsConfiguration.customerId') { should_not be_nil }
+  # Check if it's associated with a Log Analytics workspace
+  its('properties.appLogsConfiguration.destination') { should cmp 'log-analytics' }
+  its('properties.appLogsConfiguration.logAnalyticsConfiguration.customerId') { should_not be_nil }
 end
