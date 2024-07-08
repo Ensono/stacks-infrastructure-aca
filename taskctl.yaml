@@ -14,22 +14,6 @@ pipelines:
       depends_on:
         - tests:infra:vendor
 
-  # infrastructure:
-  #   - task: infra:init
-  #   - task: infra:plan
-  #     depends_on: infra:init
-  #   - task: infra:apply
-  #     depends_on: infra:plan
-
-  # infrastructure_destroy:
-  #   - task: infra:init
-  #   - task: infra:destroy:plan
-  #     depends_on:
-  #       - infra:init
-  #   - task: infra:destroy:apply
-  #     depends_on:
-  #       - infra:destroy:plan
-
   infrastructure:
     - task: setup:environment
     - task: infra:init
@@ -64,14 +48,7 @@ pipelines:
     - task: _release
 
   build:container:
-    - task: debug
     - task: build:container
 
   setup:
     - task: build:number
-
-  # setup:
-  #   - task: debug:env
-  #   - task: buildnumber
-  #     depends_on:
-  #       - debug:env
