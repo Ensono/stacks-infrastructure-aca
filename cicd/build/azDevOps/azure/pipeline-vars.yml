@@ -24,9 +24,9 @@ variables:
   # there are some best practices around this if you are going for feature based environments
   # avoid running anything past dev that is not on master
   - name: tf_state_rg
-    value: Stacks-Ancillary-Resources #stacks-terraform-state
+    value: stacks-terraform-state
   - name: tf_state_storage
-    value: amidostackstfstate #stacksstatehjfis
+    value: stacksstatehjfis
   - name: tf_state_container
     value: tfstate
 
