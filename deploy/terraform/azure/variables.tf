@@ -4,12 +4,12 @@
 
 variable "name_company" {
   description = "Company Name - should/will be used in conventional resource naming"
-  type = string
+  type        = string
 }
 
 variable "name_project" {
   description = "Project Name - should/will be used in conventional resource naming"
-  type = string
+  type        = string
 }
 
 variable "name_component" {

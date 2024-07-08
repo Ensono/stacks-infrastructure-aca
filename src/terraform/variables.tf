@@ -4,12 +4,12 @@
 
 variable "name_company" {
   description = "Company Name - should/will be used in conventional resource naming"
-  type = string
+  type        = string
 }
 
 variable "name_project" {
   description = "Project Name - should/will be used in conventional resource naming"
-  type = string
+  type        = string
 }
 
 variable "name_component" {
@@ -55,17 +55,17 @@ variable "location_name_map" {
 }
 
 variable "acr_name" {
-  type = string
+  type        = string
   description = "Name of ACR"
 }
 
 variable "acr_rg" {
-  type = string
+  type        = string
   description = "RG of ACR"
 }
 
 variable "acae_name" {
-  type = string
+  type        = string
   description = "Name of Azure Container App Environment"
 }
 
@@ -96,7 +96,7 @@ variable "create_container_app" {
 }
 
 variable "container_app_name" {
-  type = string
+  type        = string
   description = "The name of the Container App"
 }
 
