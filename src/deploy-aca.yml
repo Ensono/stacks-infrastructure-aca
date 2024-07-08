@@ -224,7 +224,7 @@ stages:
                         - template: ../cicd/build/azDevOps/templates/infra-tests.yml
                           parameters:
                             CHEF_LICENSE: $(CHEF_LICENSE)
-                            INSPEC_FILES: /app/src/terraform
+                            INSPEC_FILES: /app/src/tests
                             REPORT_FILENAME: inspec_azure_aca.xml
                             TF_FILE_LOCATION: /app/src/terraform
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
