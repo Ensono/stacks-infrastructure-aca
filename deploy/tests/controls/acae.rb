@@ -47,6 +47,13 @@ control "azure-container-app-environment" do
     its('type') { should cmp 'Microsoft.App/managedEnvironments' }
     its('provisioningState') { should cmp "Succeeded" }
   end
+
+  describe azure_generic_resource(resource_id: acae_resource.id) do
+    it { should exist }
+    its('properties.appLogsConfiguration.destination') { should cmp 'log-analytics' }
+    its('properties.appLogsConfiguration.logAnalyticsConfiguration.customerId') { should_not be_nil }
+  end
+
 end
 
 # control "azure-container-app-environment" do
