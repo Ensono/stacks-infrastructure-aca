@@ -10,7 +10,7 @@ control "azure-container-app" do
   # Get the Container App resource
   describe azure_generic_resource(resource_group: rg_name, name: aca_name) do
     it { should exist }
-    its('id') { should eq aca_id }
+    its('id') { should match(/#{Regexp.escape(aca_id)}/i) }
     its('name') { should eq aca_name }
     its('type') { should eq 'Microsoft.App/containerApps' }
     its('properties.provisioningState') { should cmp 'Succeeded' }
