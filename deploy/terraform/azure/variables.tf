@@ -4,25 +4,21 @@
 
 variable "name_company" {
   description = "Company Name - should/will be used in conventional resource naming"
-  #default     = "sat"
   type = string
 }
 
 variable "name_project" {
   description = "Project Name - should/will be used in conventional resource naming"
-  #default     = "cont"
   type = string
 }
 
 variable "name_component" {
   description = "Component Name - should/will be used in conventional resource naming. Typically this will be a logical name for this part of the system i.e. `API` || `middleware` or more generic like `Billing`"
   type        = string
-  #default     = "shared"
 }
 
 variable "stage" {
   type = string
-  #default = "dev"
 }
 
 variable "attributes" {
@@ -115,15 +111,3 @@ variable "workload_profiles" {
   description = "List of workload profiles to be created in the Container App Environment. Workload profile type for the workloads to run on. Possible values include `Consumption`, `D4`, `D8`, `D16`, `D32`, `E4`, `E8`, `E16` and `E32`."
 
 }
-
-# variable "acr_admin_enabled" {
-#   type        = bool
-#   default     = true
-#   description = "A boolean flag indicating whether admin user should be enabled for the Azure Container Registry (ACR)."
-# }
-
-# variable "acr_sku" {
-#   type        = string
-#   default     = "Standard"
-#   description = "The SKU (pricing tier) of the Azure Container Registry (ACR)."
-# }

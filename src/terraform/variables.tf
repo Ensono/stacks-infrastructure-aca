@@ -4,25 +4,21 @@
 
 variable "name_company" {
   description = "Company Name - should/will be used in conventional resource naming"
-  # default     = "sat"
   type = string
 }
 
 variable "name_project" {
   description = "Project Name - should/will be used in conventional resource naming"
-  #  default     = "cont"
   type = string
 }
 
 variable "name_component" {
   description = "Component Name - should/will be used in conventional resource naming. Typically this will be a logical name for this part of the system i.e. `API` || `middleware` or more generic like `Billing`"
   type        = string
-  #  default     = "shared"
 }
 
 variable "stage" {
   type = string
-  #  default = "dev"
 }
 
 variable "attributes" {
@@ -60,19 +56,16 @@ variable "location_name_map" {
 
 variable "acr_name" {
   type = string
-  #  default     = "satacrtest" #"satacrtest" satcontdevuksshared
   description = "Name of ACR"
 }
 
 variable "acr_rg" {
   type = string
-  #  default     = "satacrtest" #"satacrtest" satcontdevuksshared
   description = "RG of ACR"
 }
 
 variable "acae_name" {
   type = string
-  #  default     = "sat-cont-dev-uks-shared"
   description = "Name of Azure Container App Environment"
 }
 
@@ -104,7 +97,6 @@ variable "create_container_app" {
 
 variable "container_app_name" {
   type = string
-  # default     = "frontendtestapp"
   description = "The name of the Container App"
 }
 

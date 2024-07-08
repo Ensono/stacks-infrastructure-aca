@@ -183,3 +183,14 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+.terraform.lock.hcl
+
+# Testing Directories
+test
+tfplan
+inspec.lock
+deploy/deploytesting/*
+tf_outputs.yml
+deploy/tests/vendor
+inspec_inputs.yml
