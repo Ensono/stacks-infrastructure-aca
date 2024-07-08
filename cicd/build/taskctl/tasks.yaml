@@ -115,20 +115,6 @@ tasks:
       - |
         Invoke-Inspec -vendor -path $env:INSPEC_FILES -args "--overwrite"
 
-  # tests:infra:run:
-  #   context: infratests
-  #   description: Execute infrastructure tests against deployed Cloud resources
-  #   command:
-  #     - |
-  #       Import-Module Az.ContainerInstance
-  #       # TODO: Remove below for now until correct outputs from the TF Module itself
-  #       # Invoke-Terraform -Workspace -Arguments $env:TF_VAR_name_environment -Path $env:TF_FILE_LOCATION
-  #       # Invoke-Terraform -Output -Path $env:TF_FILE_LOCATION | /app/cicd/build/scripts/Set-EnvironmentVars.ps1 -prefix "TFOUT" -key "value" -passthru | ConvertTo-Yaml | Out-File -Path ${PWD}/inspec_inputs.yml
-  #       Set-Content -Path "${PWD}/inspec_inputs.yml" -Value ""
-  #       Add-Content -Path ${PWD}/inspec_inputs.yml -Value "resource_group_name: ${env:TF_VAR_resource_group_name}"
-  #       Add-Content -Path ${PWD}/inspec_inputs.yml -Value "location: ${env:TF_VAR_location}"
-  #       Invoke-Inspec -execute -arguments "--input-file ${PWD}/inspec_inputs.yml" -path $env:INSPEC_FILES
-
   tests:infra:run:
     context: infratests
     description: Execute infrastructure tests against deployed Cloud resources

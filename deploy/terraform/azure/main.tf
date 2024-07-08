@@ -49,11 +49,3 @@ module "acae" {
   create_container_app             = var.create_container_app
   create_rg                        = var.create_rg
 }
-
-# resource "azurerm_container_registry" "acr" {
-#   name                = module.default_label_short.id
-#   location            = azurerm_resource_group.default.location
-#   resource_group_name = azurerm_resource_group.default.name
-#   admin_enabled       = var.acr_admin_enabled
-#   sku                 = var.acr_sku
-# }

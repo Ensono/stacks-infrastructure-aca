@@ -124,7 +124,7 @@ stages:
                 taskctl build:container
             env:
 
-              #SELF_REPO_SRC: src/app
+              SELF_REPO_SRC: src/app
               CLOUD_PROVIDER: "$(cloud_platform)" #$(cloud_provider) # Azure
               ARM_TENANT_ID: $(azure-tenant-id)
               ARM_SUBSCRIPTION_ID: $(azure-subscription-id)

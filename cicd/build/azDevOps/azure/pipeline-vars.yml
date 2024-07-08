@@ -29,16 +29,14 @@ variables:
     value: amidostackstfstate #stacksstatehjfis
   - name: tf_state_container
     value: tfstate
-  # - name: tf_state_key
-  #   value: acacore
 
   # ------- GitHub
-  # - name: create_release
-  #   value: false
-  # - name: github_release_service_connection
-  #   value: GitHubReleases
-  # - name: github_org
-  #   value: $(company)
+  - name: create_release
+    value: false
+  - name: github_release_service_connection
+    value: GitHubReleases
+  - name: github_org
+    value: $(company)
 
   - name: VERSION_NUMBER
     value: $(Build.BuildNumber)
@@ -63,6 +61,8 @@ variables:
   - name: CLOUD_PLATFORM
     value: azure
 
+  - name: team_owner
+    value: plateng
 
-  # - name: resource_group_name
-  #   value: ed-stacks-nonprod-uks-aca
+  - name: self_repo_tf_src
+    value: deploy/terraform/azure
