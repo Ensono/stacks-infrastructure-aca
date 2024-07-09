@@ -72,6 +72,8 @@ variables:
   - name: tf_state_key
     value: $(domain)_$(appname)
 
+  - name: CHEF_LICENSE
+    value: accept-silent
   # Versioning
   - name: version_major
     value: 0
@@ -216,6 +218,25 @@ stages:
                             TF_BACKEND_PLAN: "-input=false,-out=\"tfplan\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
                             CLOUD_PLATFORM: "$(cloud_platform)"
+
+                    # Perform infrastructure tests
+                    - ${{ if eq(parameters.deploy, true) }}:
+                        - template: ../cicd/build/azDevOps/templates/infra-tests.yml
+                          parameters:
+                            CHEF_LICENSE: $(CHEF_LICENSE)
+                            INSPEC_FILES: /app/src/tests
+                            REPORT_FILENAME: inspec_azure_aca.xml
+                            TF_FILE_LOCATION: /app/src/terraform
+                            TF_VAR_name_environment: ${{ stage.environment_shortname }}
+                            TF_VAR_location: $(region)
+
+                    - ${{ if eq(parameters.deploy, true) }}:
+                        - task: PublishTestResults@2
+                          inputs:
+                            testResultsFormat: JUnit
+                            testResultsFiles: outputs/tests/inspec_azure_aca.xml
+                            testRunTitle: Terraform ACA Tests
+                            failTaskOnFailedTests: true
 
   - stage: Release
     dependsOn:
