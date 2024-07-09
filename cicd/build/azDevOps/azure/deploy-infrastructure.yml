@@ -130,6 +130,8 @@ stages:
                 targetType: inline
                 script: |
                   taskctl docs
+            env:
+              DOCKER_IMAGE_TAG: $(version_number)
 
           # Upload the documentation as a build artifact
           - ${{ if eq(parameters.run_docs, true) }}:
