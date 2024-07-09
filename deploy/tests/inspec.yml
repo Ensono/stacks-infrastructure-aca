@@ -1,0 +1,23 @@
+name: stacks-infrastructure-aca
+title: Stacks Infrastructure ACA
+maintainer: Ensono Digital
+copyright: Ensono Digital
+copyright_email: stacks@ensono.com
+license: Apache-2.0
+summary: |
+  A profile to test that the infrastructure for ACA has been setup as expected
+version: 0.1.0
+inspec_version: ">= 2.2.7"
+depends:
+  - name: inspec-azure
+    url: https://github.com/inspec/inspec-azure/archive/main.tar.gz
+supports:
+  - platform: azure
+
+# Define the inputs for the control
+inputs:
+  - name: rg_name
+    description: Group containing all the resources for the Azure Container App
+  - name: location
+    description: location that the resources are expected to be deployed into
+

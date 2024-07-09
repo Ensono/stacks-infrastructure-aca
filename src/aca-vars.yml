@@ -1,0 +1,17 @@
+variables:
+
+  - name: container_registry_server
+    value: "redistestreg.azurecr.io"
+  - name: registry_resoruce_group
+    value: "danredistest"
+  - name: container_registry_name
+    value: "redistestreg"
+  - name: container_environment_name
+    value: "ed-stacks-nonprod-uks-aca"
+
+
+
+    
+
+
+
