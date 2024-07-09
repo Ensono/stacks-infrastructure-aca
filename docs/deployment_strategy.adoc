@@ -49,3 +49,15 @@ STACKS-INFRASTRUCTURE-ACA
 ├── README.md            # Main readme file with project documentation
 └── taskctl.yaml         # TaskCTL configuration file
 ----
+
+Pros::
+* Eliminates the need for initial Container App provisioning with a public image.
+* Avoids unnecessary revisions in the Container App.
+* Facilitates easier maintenance and version control of container images.
+* Provides loose coupling in Container App deployment.
+* Allows for more precise control over image versions used in deployments.
+* Aligns infrastructure provisioning more closely with application lifecycle.
+* Enables application-specific configurations: Each individual Container App can have different liveness and readiness probes, scaling rules, and ingress settings (such as ingress port) that are more closely aligned with application requirements. This allows each Container App team to define these settings independently in their application deployment pipeline, providing greater flexibility and customization.
+
+Cons::
+* Requires separate management of Terraform code for each individual Container App

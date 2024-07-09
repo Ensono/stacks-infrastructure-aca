@@ -7,9 +7,9 @@ weight: 30
 
 == Infrastructure
 
-Azure Container Apps (ACA) is a fully managed serverless container service for building and deploying modern apps at scale - without managing infrastructure. It builds on top of Kubernetes, offering a fully managed experience for deploying containerized applications without requiring direct access to Kubernetes APIs or cluster management.
-
 All of the infrastructure that is deployed to Azure, is done using Terraform. The templates have been configured so that different options can be deployed depending on requirements.
+
+The deployment of the resources is performed using the Ensono Digital ACI module as found in the https://github.com/ensono/terraform-azurerm-aca[Ensono Terraform ACA] repository.
 
 == Azure Container Apps Components
 
@@ -26,7 +26,6 @@ Azure Container Apps consists of two primary components:
 
 image::images/aca-components.png[ACA Components]
 
-The deployment of the resources is performed using the Ensono Digital ACI module as found in the https://github.com/ensono/terraform-azurerm-aca[Ensono Terraform ACA] repository.
 
 === Terraform Outputs
 
