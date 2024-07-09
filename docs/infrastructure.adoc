@@ -11,7 +11,7 @@ All of the infrastructure that is deployed to Azure, is done using Terraform. Th
 
 The deployment of the resources is performed using the Ensono Digital ACI module as found in the https://github.com/ensono/terraform-azurerm-aca[Ensono Terraform ACA] repository.
 
-== Azure Container Apps Components
+=== Azure Container App Components
 
 Azure Container Apps consists of two primary components:
 
