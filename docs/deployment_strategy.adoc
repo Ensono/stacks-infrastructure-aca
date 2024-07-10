@@ -1,0 +1,63 @@
+---
+id: aca_deployment_strategy
+title: Deployment Strategy
+description: Details about how to deploy ACA resources
+weight: 30
+---
+
+== CICD Strategy
+ 
+The deployment strategy can be segmented into two parts:
+
+* Infrastructure Deployment
+* App Deployment
+
+Container App Environment deployment via Infrastructure pipeline, Container App deployment via Application pipeline.
+
+This approach separates the deployment of the Container App Environment and the Container App itself:
+
+* Infrastructure Deployment Pipeline:
+** Deploys Container App Environment and other required resources.
+** Does not provision the Container App at this stage.
+
+* Application Deployment Pipeline:
+** Builds application code and publishes the image to the container registry.
+** Provisions the Container App using Terraform with the newly created image.
+
+image::images/cicd.png[CICD]
+
+[source]
+----
+STACKS-INFRASTRUCTURE-ACA
+├── .github              # GitHub-specific configurations and workflows
+├── cicd
+│   └── build            # CI/CD build configurations
+│       ├── azDevOps     # Azure DevOps specific build configurations
+│       ├── config       # Configuration files for the build process
+│       ├── scripts      # Build-related scripts
+│       └── taskctl      # TaskCTL configurations for the build process
+├── deploy
+│   └── azure            # Terraform configurations for the Core Infra deployment excluding Container App
+├── src
+│   ├── app              # Application source code
+│   └── terraform        # Terraform configurations for the application (Container App)
+│   └── aca-vars.yml     # Variables specific to Azure Container App
+│   └── deploy-aca.yml   # Deployment configuration for Azure Container App
+├── .gitattributes       # Git attributes file
+├── .gitignore           # Git ignore file
+├── LICENSE              # License file for the project
+├── README.md            # Main readme file with project documentation
+└── taskctl.yaml         # TaskCTL configuration file
+----
+
+Pros::
+* Eliminates the need for initial Container App provisioning with a public image.
+* Avoids unnecessary revisions in the Container App.
+* Facilitates easier maintenance and version control of container images.
+* Provides loose coupling in Container App deployment.
+* Allows for more precise control over image versions used in deployments.
+* Aligns infrastructure provisioning more closely with application lifecycle.
+* Enables application-specific configurations: Each individual Container App can have different liveness and readiness probes, scaling rules, and ingress settings (such as ingress port) that are more closely aligned with application requirements. This allows each Container App team to define these settings independently in their application deployment pipeline, providing greater flexibility and customization.
+
+Cons::
+* Requires separate management of Terraform code for each individual Container App
