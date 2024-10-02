@@ -26,10 +26,10 @@ In order to run the pipeline locally a number of environment variables are requi
 [cols="2,3,1,3,2,2",options="header",stripes=even]
 |===
 | Name                        | Description                                                                 | Type           | Default | Example | Required
-| `TF_VAR_FILE_LOCATION`     | Path to the Terraform template files                                        | string              | "/deploy/terraform"      | -      | [green]#icon:check[]#
-| `TF_VAR_BACKEND_INIT`      | Arguments that should be passed to Terraform during the init process        | string              | "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)       | -      | [red]#icon:times[]#
-| `TF_VAR_BACKEND_PLAN`      | Arguments that should be passed to Terraform during the plan process        | string              | "-input=false,-out=\"tfplan\""      | -       | [red]#icon:times[]# 
-| `TF_VAR_name_company`      | Name of the company that the cluster is being built for                     |  string              | - | "myCompany"      | [red]#icon:times[]#
+| `TF_FILE_LOCATION`     | Path to the Terraform template files                                        | string              | "/deploy/terraform"      | -      | [green]#icon:check[]#
+| `TF_BACKEND_INIT`      | Arguments that should be passed to Terraform during the init process        | string              | "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)       | -      | [green]#icon:check[]#
+| `TF_BACKEND_PLAN`      | Arguments that should be passed to Terraform during the plan process        | string              | "-input=false,-out=\"tfplan\""      | -       | [green]#icon:check[]# 
+| `TF_VAR_name_company`      | Name of the company that the cluster is being built for                     |  string              | - | "myCompany"      | [green]#icon:check[]#
 | `TF_VAR_name_project`      | Name of the project                                                         |   string             | - | "myProject"        | [green]#icon:check[]#
 | `TF_VAR_name_component`    |                                                                             |   string             | - | "myComponent"     | [green]#icon:check[]#
 | `TF_VAR_name_environment`  |                                                                             |   string             | -       | "myEnv"       | [green]#icon:check[]#

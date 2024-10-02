@@ -194,11 +194,11 @@ stages:
                             script: |
                               taskctl infrastructure_destroy
                           env:
+                            CLOUD_PLATFORM: azure
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_DESTROY_PLAN: "-input=false,-out=\"destroy\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
-
 
                     # Create the resources
                     - ${{ if eq(parameters.deploy, true) }}:
@@ -209,11 +209,11 @@ stages:
                             script: |
                               taskctl infrastructure
                           env:
+                            CLOUD_PLATFORM: azure
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_PLAN: "-input=false,-out=\"tfplan\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
-
 
                     # Perform infrastructure tests
                     - ${{ if eq(parameters.deploy, true) }}:

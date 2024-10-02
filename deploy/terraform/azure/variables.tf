@@ -17,6 +17,10 @@ variable "name_component" {
   type        = string
 }
 
+variable "name_environment" {
+  type = string
+}
+
 variable "stage" {
   type = string
 }

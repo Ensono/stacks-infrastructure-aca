@@ -187,10 +187,14 @@ terraform.rc
 .terraform.lock.hcl
 
 # Testing Directories
+envfile
 test
 tfplan
 inspec.lock
+destroy
 deploy/deploytesting/*
 tf_outputs.yml
 deploy/tests/vendor
 inspec_inputs.yml
+outputs/*
+tmp/*
