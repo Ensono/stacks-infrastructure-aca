@@ -16,7 +16,7 @@ variables:
   # which domain fo the company is this. e.g. core resources, or front end
   # This is not a network domain
   - name: domain
-    value: aca
+    value: bal
 
   # -------- Terraform remote state
   # Stacks operates Terraform states based on workspaces **IT IS VERY IMPORTANT** that you ensure a unique name for each application definition
@@ -24,9 +24,9 @@ variables:
   # there are some best practices around this if you are going for feature based environments
   # avoid running anything past dev that is not on master
   - name: tf_state_rg
-    value: stacks-terraform-state
+    value: bal-aca-testing
   - name: tf_state_storage
-    value: stacksstatehjfis
+    value: balacatesting
   - name: tf_state_container
     value: tfstate
 
