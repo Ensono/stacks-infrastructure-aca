@@ -22,9 +22,6 @@ pipelines:
     - task: infra:plan
       depends_on:
         - infra:init
-    - task: infra:apply
-      depends_on:
-        - infra:plan
 
   infrastructure_destroy:
     - task: setup:environment
