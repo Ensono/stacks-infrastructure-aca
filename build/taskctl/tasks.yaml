@@ -156,7 +156,7 @@ tasks:
       - Get-ChildItem env:/
 
   debug:sleep:
-    context: infratests
+    context: powershell
     command:
       - echo "Sleeping for {{ .sleep }}"
       - sleep {{ .sleep }}
