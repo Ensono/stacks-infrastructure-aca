@@ -206,7 +206,7 @@ stages:
                     # Create the resources
                     - ${{ if eq(parameters.deploy, true) }}:
                         - task: Bash@3
-                          displayName: Deploy ACA
+                          displayName: Deploy environment
                           inputs:
                             targetType: inline
                             script: |
