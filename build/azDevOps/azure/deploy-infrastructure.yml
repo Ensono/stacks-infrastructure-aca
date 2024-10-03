@@ -148,8 +148,7 @@ stages:
         dependsOn: ${{ stage.dependsOn }}
         condition: and(succeeded(), or(${{ stage.condition }}, ${{ parameters.force_deploy }}))
         variables:
-          # Pull in the non-production credentials for the build to use
-          - group: stacks-credentials-nonprod-kv
+          - group: stacks-credentials-${{ stage.environment_shortname }}-kv
         jobs:
           - deployment: ${{ stage.deployment_infra }}
             environment: ${{ variables.domain }}-${{ stage.environment_shortname }}
