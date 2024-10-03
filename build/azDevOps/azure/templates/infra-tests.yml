@@ -36,3 +36,8 @@ steps:
       AZURE_CLIENT_SECRET: ${{ parameters.AZURE_CLIENT_SECRET }}
       AZURE_SUBSCRIPTION_ID: ${{ parameters.AZURE_SUBSCRIPTION_ID }}
       AZURE_TENANT_ID: ${{ parameters.AZURE_TENANT_ID }}
+
+      ARM_CLIENT_ID: ${{ parameters.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ parameters.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ parameters.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ parameters.AZURE_TENANT_ID }}
