@@ -38,7 +38,7 @@ resource "azurerm_log_analytics_workspace" "la" {
 }
 
 module "acae" {
-  source = "git::https://github.com/Ensono/terraform-azurerm-aca?ref=feature/7427-terraform-module-for-aca"
+  source = "git::https://github.com/Ensono/terraform-azurerm-aca?ref=1.0.1"
 
   resource_group_name              = azurerm_resource_group.default.name
   location                         = azurerm_resource_group.default.location

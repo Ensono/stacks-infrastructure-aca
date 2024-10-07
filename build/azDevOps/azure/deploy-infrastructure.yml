@@ -15,9 +15,9 @@ pr:
       - "main"
   paths:
     include:
-      - cicd/build/azDevOps/*
-      - cicd/build/taskctl/*
-      - cicd/deploy/terraform/azure/*
+      - build/azDevOps/*
+      - build/taskctl/*
+      - deploy/terraform/azure/*
 
 trigger:
   branches:
@@ -25,9 +25,9 @@ trigger:
       - "main"
   paths:
     include:
-      - cicd/build/azDevOps/*
-      - cicd/build/taskctl/*
-      - cicd/deploy/terraform/azure/*
+      - build/azDevOps/*
+      - build/taskctl/*
+      - deploy/terraform/azure/*
 
 # Configure parameters for running the build
 parameters:
@@ -101,7 +101,7 @@ stages:
         pool:
           vmImage: $(pool_vm_image)
         steps:
-          - template: ../templates/setup.yml
+          - template: ./templates/setup.yml
             parameters:
               TaskctlVersion: ${{ variables.TaskctlVersion }}
 
@@ -148,8 +148,7 @@ stages:
         dependsOn: ${{ stage.dependsOn }}
         condition: and(succeeded(), or(${{ stage.condition }}, ${{ parameters.force_deploy }}))
         variables:
-          # Pull in the non-production credentials for the build to use
-          - group: ensono-sp-creds #stacks-credentials-nonprod-kv #ensono-sp-creds
+          - group: stacks-credentials-nonprod-kv
         jobs:
           - deployment: ${{ stage.deployment_infra }}
             environment: ${{ variables.domain }}-${{ stage.environment_shortname }}
@@ -160,7 +159,7 @@ stages:
               runOnce:
                 deploy:
                   steps:
-                    - template: ../templates/setup.yml
+                    - template: ./templates/setup.yml
                       parameters:
                         TaskctlVersion: ${{ variables.TaskctlVersion }}
 
@@ -183,7 +182,7 @@ stages:
 
                     # Upload the Terraform variables file and the plan for debugging
                     - ${{ if eq(parameters.upload, true) }}:
-                        - template: ../templates/upload.yml
+                        - template: ./templates/upload.yml
 
                     # Remove the infrastructure if the parameter has been set
                     - ${{ if eq(parameters.destroy, true) }}:
@@ -194,30 +193,38 @@ stages:
                             script: |
                               taskctl infrastructure_destroy
                           env:
+                            CLOUD_PLATFORM: "$(cloud_platform)"
+                            ARM_TENANT_ID: $(azure-tenant-id)
+                            ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
+                            ARM_CLIENT_ID: $(azure-client-id)
+                            ARM_CLIENT_SECRET: $(azure-client-secret)
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_DESTROY_PLAN: "-input=false,-out=\"destroy\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
 
-
                     # Create the resources
                     - ${{ if eq(parameters.deploy, true) }}:
                         - task: Bash@3
-                          displayName: Deploy ACA
+                          displayName: Deploy environment
                           inputs:
                             targetType: inline
                             script: |
                               taskctl infrastructure
                           env:
+                            CLOUD_PLATFORM: "$(cloud_platform)"
+                            ARM_TENANT_ID: $(azure-tenant-id)
+                            ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
+                            ARM_CLIENT_ID: $(azure-client-id)
+                            ARM_CLIENT_SECRET: $(azure-client-secret)
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_PLAN: "-input=false,-out=\"tfplan\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
 
-
                     # Perform infrastructure tests
                     - ${{ if eq(parameters.deploy, true) }}:
-                        - template: ../templates/infra-tests.yml
+                        - template: ./templates/infra-tests.yml
                           parameters:
                             CHEF_LICENSE: $(CHEF_LICENSE)
                             INSPEC_FILES: /app/deploy/tests
@@ -225,6 +232,10 @@ stages:
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
                             TF_VAR_location: $(region)
+                            AZURE_TENANT_ID: $(azure-tenant-id)
+                            AZURE_SUBSCRIPTION_ID: $(azure-subscription-id)
+                            AZURE_CLIENT_ID: $(azure-client-id)
+                            AZURE_CLIENT_SECRET: $(azure-client-secret)
 
                     - ${{ if eq(parameters.deploy, true) }}:
                         - task: PublishTestResults@2
@@ -250,7 +261,7 @@ stages:
         pool:
           vmImage: $(pool_vm_image)
         steps:
-          - template: ../templates/setup.yml
+          - template: ./templates/setup.yml
             parameters:
               TaskctlVersion: ${{ variables.TaskctlVersion }}
 

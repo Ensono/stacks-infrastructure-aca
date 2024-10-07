@@ -61,7 +61,7 @@ parameters:
     default: false
 
 variables:
-  - template: ../cicd/build/azDevOps/azure/pipeline-vars.yml  
+  - template: ../build/azDevOps/azure/pipeline-vars.yml  
   - template: aca-vars.yml
   - name: appname
     value: "frontendapp"
@@ -93,7 +93,7 @@ stages:
         pool:
           vmImage: $(pool_vm_image)
         steps:
-          - template: ../cicd/build/azDevOps/templates/setup.yml
+          - template: ../build/azDevOps/templates/setup.yml
             parameters:
               TaskctlVersion: ${{ variables.TaskctlVersion }}
 
@@ -151,7 +151,7 @@ stages:
               runOnce:
                 deploy:
                   steps:
-                    - template: ../cicd/build/azDevOps/templates/setup.yml
+                    - template: ../build/azDevOps/templates/setup.yml
                       parameters:
                         TaskctlVersion: ${{ variables.TaskctlVersion }}
 
@@ -185,7 +185,7 @@ stages:
 
                     # Upload the Terraform variables file and the plan for debugging
                     - ${{ if eq(parameters.upload, true) }}:
-                        - template: ../cicd/build/azDevOps/templates/upload.yml
+                        - template: ../build/azDevOps/templates/upload.yml
                           parameters:
                             contents: $(Build.SourcesDirectory)/src/terraform/*.tfvars
 
@@ -221,7 +221,7 @@ stages:
 
                     # Perform infrastructure tests
                     - ${{ if eq(parameters.deploy, true) }}:
-                        - template: ../cicd/build/azDevOps/templates/infra-tests.yml
+                        - template: ../build/azDevOps/templates/infra-tests.yml
                           parameters:
                             CHEF_LICENSE: $(CHEF_LICENSE)
                             INSPEC_FILES: /app/src/tests
@@ -255,7 +255,7 @@ stages:
         pool:
           vmImage: $(pool_vm_image)
         steps:
-          - template: ../cicd/build/azDevOps/templates/setup.yml
+          - template: ../build/azDevOps/templates/setup.yml
             parameters:
               TaskctlVersion: ${{ variables.TaskctlVersion }}
 

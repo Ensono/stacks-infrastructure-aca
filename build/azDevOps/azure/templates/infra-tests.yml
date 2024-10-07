@@ -7,6 +7,10 @@ parameters:
   TF_FILE_LOCATION:
   TF_VAR_name_environment:
   TF_VAR_location:
+  AZURE_CLIENT_ID:
+  AZURE_CLIENT_SECRET:
+  AZURE_SUBSCRIPTION_ID:
+  AZURE_TENANT_ID:
   # TF_VAR_resource_group_name:
 
 steps:
@@ -28,7 +32,12 @@ steps:
 
       # Ensure that the env vars are set for access
       # The following are the env vars that Inspec requires for authentication with Azure
-      AZURE_CLIENT_ID: $(ARM_CLIENT_ID)
-      AZURE_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
-      AZURE_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-      AZURE_TENANT_ID: $(ARM_TENANT_ID)
+      AZURE_CLIENT_ID: ${{ parameters.AZURE_CLIENT_ID }}
+      AZURE_CLIENT_SECRET: ${{ parameters.AZURE_CLIENT_SECRET }}
+      AZURE_SUBSCRIPTION_ID: ${{ parameters.AZURE_SUBSCRIPTION_ID }}
+      AZURE_TENANT_ID: ${{ parameters.AZURE_TENANT_ID }}
+
+      ARM_CLIENT_ID: ${{ parameters.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ parameters.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ parameters.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ parameters.AZURE_TENANT_ID }}

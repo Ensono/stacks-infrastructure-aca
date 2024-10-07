@@ -26,6 +26,7 @@ contexts:
         - path
         - home
         - kubeconfig
+        - tmpdir
 
   infratests:
     executable:
@@ -54,33 +55,7 @@ contexts:
         - path
         - home
         - PSModulePath
-
-  powershell-python:
-    executable:
-      bin: docker
-      args:
-        - run
-        - --rm
-        - -v
-        - ${PWD}:/app
-        - -v
-        - /var/run/docker.sock:/var/run/docker.sock
-        - -e
-        - PSModulePath=/modules
-        - -w
-        - /app
-        - --env-file
-        - envfile
-        - amidostacks/runner-pwsh:0.4.60-stable
-        - pwsh
-        - -NoProfile
-        - -Command
-    quote: "'"
-    envfile:
-      generate: true
-      exclude:
-        - path
-        - home
+        - tmpdir
 
   docsenv:
     executable:
@@ -106,3 +81,4 @@ contexts:
       exclude:
         - path
         - home
+        - tmpdir
