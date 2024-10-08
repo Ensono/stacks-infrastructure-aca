@@ -58,21 +58,6 @@ variable "location_name_map" {
   }
 }
 
-
-# Log Analytics workspace Details
-
-variable "la_sku" {
-  type        = string
-  default     = "PerGB2018"
-  description = "Specifies the SKU of the Log Analytics Workspace."
-}
-
-variable "la_retention" {
-  type        = number
-  default     = 30
-  description = "The workspace data retention in days. Possible values are either 7 (Free Tier only) or range between 30 and 730."
-}
-
 variable "create_rg" {
   type        = bool
   default     = false
@@ -114,4 +99,86 @@ variable "workload_profiles" {
   ]
   description = "List of workload profiles to be created in the Container App Environment. Workload profile type for the workloads to run on. Possible values include `Consumption`, `D4`, `D8`, `D16`, `D32`, `E4`, `E8`, `E16` and `E32`."
 
+}
+
+###########################
+# ACR SETTINGS
+###########################
+variable "create_acr" {
+  description = "whether to create a ACR"
+  type        = bool
+
+  default = false
+}
+
+variable "acr_resource_group" {
+  description = "Supply your own resource group name for ACR"
+  type        = string
+
+  default = ""
+}
+
+variable "acr_registry_name" {
+  description = "ACR name"
+  type        = string
+
+  default = ""
+}
+
+variable "registry_admin_enabled" {
+  description = "Whether ACR admin is enabled"
+  type        = bool
+
+  default = true
+}
+
+variable "registry_sku" {
+  description = "ACR SKU"
+  type        = string
+
+  default = "Standard"
+}
+
+
+###########################
+# MISC SETTINGS
+###########################
+
+variable "la_sku" {
+  type        = string
+  default     = "PerGB2018"
+  description = "Specifies the SKU of the Log Analytics Workspace."
+}
+
+variable "la_retention" {
+  type        = number
+  default     = 30
+  description = "The workspace data retention in days. Possible values are either 7 (Free Tier only) or range between 30 and 730."
+}
+
+variable "create_app_insights" {
+  description = "Specify if a app insights should be created"
+  type        = bool
+
+  default = false
+}
+variable "log_application_type" {
+  description = "Log application type"
+  type        = string
+
+  default = "other"
+}
+
+variable "key_vault_name" {
+  description = "Key Vault name - if not specificied will default to computed naming convention"
+  type        = string
+
+  default = ""
+}
+
+variable "create_key_vault" {
+  description = "Specify if a key vault should be created"
+  type        = bool
+
+  default = false
 }

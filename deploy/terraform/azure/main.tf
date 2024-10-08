@@ -28,15 +28,6 @@ resource "azurerm_resource_group" "default" {
   tags     = module.default_label.tags
 }
 
-resource "azurerm_log_analytics_workspace" "la" {
-  name                = module.default_label.id
-  location            = azurerm_resource_group.default.location
-  resource_group_name = azurerm_resource_group.default.name
-  sku                 = var.la_sku
-  retention_in_days   = var.la_retention
-  tags                = module.default_label.tags
-}
-
 module "acae" {
   source = "git::https://github.com/Ensono/terraform-azurerm-aca?ref=1.0.1"
 
