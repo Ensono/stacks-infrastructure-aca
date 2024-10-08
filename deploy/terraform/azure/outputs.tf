@@ -16,13 +16,13 @@ output "acae_id" {
 
 output "acr_resource_group_name" {
   description = "Created ACR resource group Name"
-  value       = var.create_acr ? azurerm_container_registry.registry.0.resource_group_name : var.acr_resource_group
+  value       = var.create_acr ? azurerm_container_registry.registry.0.resource_group_name : null
   depends_on  = [azurerm_resource_group.default]
 }
 
 output "acr_registry_name" {
   description = "Created ACR name"
-  value       = var.create_acr ? azurerm_container_registry.registry.0.name : var.acr_registry_name
+  value       = var.create_acr ? azurerm_container_registry.registry.0.name : null
   depends_on  = [azurerm_resource_group.default]
 }
 
@@ -31,7 +31,7 @@ output "acr_registry_name" {
 # Key Vault
 #########################################
 output "key_vault_name" {
-  value = var.create_key_vault ? azurerm_key_vault.default.0.name : ""
+  value = var.create_key_vault ? azurerm_key_vault.default.0.name : null
 }
 
 #########################################
@@ -39,18 +39,19 @@ output "key_vault_name" {
 #########################################
 
 output "app_insights_resource_group_name" {
-  value = var.create_app_insights ? azurerm_application_insights.default[0].resource_group_name : ""
+  value = var.create_app_insights ? azurerm_application_insights.default[0].resource_group_name : null
 }
+
 output "app_insights_name" {
-  value = var.create_app_insights ? azurerm_application_insights.default[0].name : ""
+  value = var.create_app_insights ? azurerm_application_insights.default[0].name : null
 }
 
 output "app_insights_id" {
-  value = var.create_app_insights ? azurerm_application_insights.default[0].id : ""
+  value = var.create_app_insights ? azurerm_application_insights.default[0].id : null
 }
 
 output "app_insights_instrumentation_key" {
-  value = var.create_app_insights ? azurerm_application_insights.default[0].instrumentation_key  : ""
+  value = var.create_app_insights ? azurerm_application_insights.default[0].instrumentation_key  : null
   sensitive = true
 }
 
