@@ -14,9 +14,9 @@ output "acae_id" {
 # ACR
 #########################################
 # If the ACR was created by this deployment then return its name otherwise return the ACR name that has been created by a different deployment
-output "acr_registry_name" {
+output "acr_name" {
   description = "Created ACR name"
-  value       = var.create_acr ? azurerm_container_registry.registry.0.name : var.acr_registry_name
+  value       = var.create_acr ? azurerm_container_registry.registry.0.name : var.acr_name
   depends_on  = [azurerm_resource_group.default]
 }
 
@@ -84,4 +84,22 @@ output "dns_base_domain" {
 
 output "dns_resource_group_name" {
   value = var.dns_resource_group
+}
+
+#########################################
+# VNET
+#########################################
+output "vnet_name" {
+  description = "Created VNET name.\nName can be deduced however it's better to create a direct dependency"
+  value       = var.create_acavnet ? azurerm_virtual_network.default[0].name : data.azurerm_virtual_network.default[0].name
+}
+
+output "vnet_address_space" {
+  description = "Specified VNET address space"
+  value       = var.create_acavnet ? azurerm_virtual_network.default[0].address_space : data.azurerm_virtual_network.default[0].address_space
+}
+
+output "vnet_address_id" {
+  description = "Specified VNET Id"
+  value       = var.create_acavnet ? azurerm_virtual_network.default[0].id : data.azurerm_virtual_network.default[0].id
 }
