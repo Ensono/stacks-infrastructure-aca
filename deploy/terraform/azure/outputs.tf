@@ -51,7 +51,7 @@ output "app_insights_id" {
 }
 
 output "instrumentation_key" {
-  value = var.create_app_insights ? azurerm_application_insights.default[0].instrumentation_key  : null
+  value     = var.create_app_insights ? azurerm_application_insights.default[0].instrumentation_key : null
   sensitive = true
 }
 
@@ -71,6 +71,6 @@ output "log_analytics_id" {
 }
 
 output "log_analytics_key" {
-  value = azurerm_log_analytics_workspace.la.primary_shared_key
+  value     = azurerm_log_analytics_workspace.la.primary_shared_key
   sensitive = true
 }
