@@ -188,7 +188,7 @@ stages:
                         TF_VAR_create_app_insights: $(create_app_insights)
                         TF_VAR_dns_resource_group: $(dns_resource_group)
                         TF_VAR_dns_zone: ${{ stage.dns_zone }}
-                        TF_VAR_create_aca_vnet: $(create_aca_vnet)
+                        TF_VAR_create_acavnet: $(create_acavnet)
 
                     # Upload the Terraform variables file and the plan for debugging
                     - ${{ if eq(parameters.upload, true) }}:
