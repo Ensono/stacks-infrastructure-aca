@@ -179,6 +179,11 @@ stages:
                         TF_VAR_name_component: $(domain)
                         TF_VAR_stage: ${{ stage.environment_shortname }}
                         TF_VAR_location: $(region)
+                        TF_VAR_create_key_vault: $(create_key_vault)
+                        TF_VAR_create_acr: $(create_acr)
+                        TF_VAR_acr_resource_group: $(acr_resource_group)
+                        TF_VAR_acr_name: $(acr_name)
+                        TF_VAR_create_app_insights: $(create_app_insights)
 
                     # Upload the Terraform variables file and the plan for debugging
                     - ${{ if eq(parameters.upload, true) }}:
