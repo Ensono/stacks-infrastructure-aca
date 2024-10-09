@@ -182,3 +182,20 @@ variable "create_key_vault" {
 
   default = false
 }
+
+#########################################
+# DNS
+#########################################
+variable "dns_zone" {
+  description = "Dns zone name - e.g. nonprod.domain.com, you should avoid using an APEX zone"
+  type        = string
+
+  default = ""
+}
+
+variable "dns_resource_group" {
+  type        = string
+  description = "RG that contains the existing DNS zones, if the zones are not being created here"
+
+  default = null
+}

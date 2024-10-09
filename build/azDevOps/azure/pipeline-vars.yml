@@ -78,3 +78,11 @@ variables:
   
   - name: create_app_insights
     value: true
+
+  # -------- Network Domain names
+  - name: dns_resource_group
+    value: stacks-ancillary-resources
+  - name: base_domain_nonprod
+    value: nonprod.stacks.ensono.com
+  - name: base_domain_prod
+    value: prod.stacks.ensono.com

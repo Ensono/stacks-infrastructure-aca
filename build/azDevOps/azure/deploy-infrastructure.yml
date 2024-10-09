@@ -65,12 +65,14 @@ parameters:
         environment_shortname: nonprod
         deployment_infra: InfraNonProd
         deployment_apps: ACANonProd
+        dns_zone: $(base_domain_nonprod)
       - stage: Prod
         dependsOn: Build
         condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
         environment_shortname: prod
         deployment_infra: InfraProd
         deployment_apps: ACAProd
+        dns_zone: $(base_domain_prod)
 
   - name: debug
     displayName: Turn on debug for the Independent Runner
@@ -184,6 +186,8 @@ stages:
                         TF_VAR_acr_resource_group: $(acr_resource_group)
                         TF_VAR_acr_name: $(acr_name)
                         TF_VAR_create_app_insights: $(create_app_insights)
+                        TF_VAR_dns_resource_group: $(dns_resource_group)
+                        TF_VAR_dns_zone: ${{ stage.dns_zone }}
 
                     # Upload the Terraform variables file and the plan for debugging
                     - ${{ if eq(parameters.upload, true) }}:

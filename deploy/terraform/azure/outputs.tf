@@ -74,3 +74,14 @@ output "log_analytics_key" {
   value     = azurerm_log_analytics_workspace.la.primary_shared_key
   sensitive = true
 }
+
+#########################################
+# DNS
+#########################################
+output "dns_base_domain" {
+  value = var.dns_zone
+}
+
+output "dns_resource_group_name" {
+  value = var.dns_resource_group
+}

@@ -16,7 +16,7 @@ supports:
 
 # Define the inputs for the control
 inputs:
-  - name: rg_name
+  - name: resource_group_name
     description: Group containing all the resources for the Azure Container App
   - name: location
     description: location that the resources are expected to be deployed into
