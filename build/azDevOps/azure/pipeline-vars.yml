@@ -77,4 +77,4 @@ variables:
     value: false
   
   - name: create_app_insights
-    value: false
+    value: true
