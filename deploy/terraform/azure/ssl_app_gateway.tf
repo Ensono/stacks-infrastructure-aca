@@ -1,6 +1,5 @@
-/*
 module "ssl_app_gateway" {
-  source = "git::https://github.com/Ensono/stacks-terraform//azurerm/modules/azurerm-app-gateway?ref=v4.0.6"
+  source = "git::https://github.com/Ensono/stacks-terraform//azurerm/modules/azurerm-app-gateway?ref=add-app-gateway-sku-variables"
 
   resource_namer            = module.default_label.id
   resource_group_name       = azurerm_resource_group.default.name
@@ -23,4 +22,3 @@ module "ssl_app_gateway" {
     "policy_name" = "AppGwSslPolicy20170401S",
   }
 }
-*/

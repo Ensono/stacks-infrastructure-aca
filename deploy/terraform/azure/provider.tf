@@ -1,6 +1,11 @@
 terraform {
   required_version = ">= 0.13"
   required_providers {
+    acme = {
+      source  = "vancluever/acme"
+      version = "~> 2.0"
+    }
+
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 3.108.0"
@@ -16,4 +21,8 @@ terraform {
 
 provider "azurerm" {
   features {}
+}
+
+provider "acme" {
+  server_url = "https://acme-v02.api.letsencrypt.org/directory"
 }
