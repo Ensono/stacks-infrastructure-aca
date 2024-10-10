@@ -31,13 +31,14 @@ resource "azurerm_resource_group" "default" {
 module "acae" {
   source = "git::https://github.com/Ensono/terraform-azurerm-aca?ref=1.0.1"
 
-  resource_group_name                                = azurerm_resource_group.default.name
-  location                                           = azurerm_resource_group.default.location
-  container_app_environment_name                     = module.default_label.id
-  log_analytics_workspace_id                         = azurerm_log_analytics_workspace.la.id
-  workload_profiles                                  = var.workload_profiles
-  create_container_app_environment                   = var.create_container_app_environment
-  create_container_app                               = var.create_container_app
-  create_rg                                          = var.create_rg
-  container_app_environment_infrastructure_subnet_id = var.create_acavnet ? azurerm_subnet.aca[0].id : null
+  resource_group_name                                      = azurerm_resource_group.default.name
+  location                                                 = azurerm_resource_group.default.location
+  container_app_environment_name                           = module.default_label.id
+  log_analytics_workspace_id                               = azurerm_log_analytics_workspace.la.id
+  workload_profiles                                        = var.workload_profiles
+  create_container_app_environment                         = var.create_container_app_environment
+  create_container_app                                     = var.create_container_app
+  create_rg                                                = var.create_rg
+  container_app_environment_internal_load_balancer_enabled = true
+  container_app_environment_infrastructure_subnet_id       = var.create_acavnet ? azurerm_subnet.aca[0].id : null
 }
