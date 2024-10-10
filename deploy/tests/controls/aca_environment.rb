@@ -3,7 +3,7 @@ control "azure-container-app-environment" do
   desc "Ensure that the Azure Container App Environment has been deployed as expected"
 
   # Get all resources that match the criteria
-  resources = azure_generic_resources(resource_group: input("rg_name"), name: input("acae_name"))
+  resources = azure_generic_resources(resource_group: input("resource_group_name"), name: input("acae_name"))
 
   # Filter for the Container App Environment
   acae_resource = resources.where(type: 'Microsoft.App/managedEnvironments').entries.first
