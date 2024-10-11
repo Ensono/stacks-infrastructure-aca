@@ -33,7 +33,7 @@ resource "azurerm_subnet" "aca" {
     name = "delegation"
     service_delegation {
       name    = "Microsoft.App/environments"
-      actions = ["Microsoft.Network/virtualNetworks/subnets/action", "Microsoft.Network/virtualNetworks/subnets/join/action"]
+      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
     }
   }
 }

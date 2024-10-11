@@ -10,13 +10,14 @@ module "ssl_app_gateway" {
   dns_zone                = var.dns_zone
   #pfx_password              = var.pfx_password
   aks_resource_group        = azurerm_resource_group.default.name
-  aks_ingress_ip            = "51.142.218.161" #this is the backend ip#var.is_cluster_private ? module.aks_bootstrap.aks_ingress_private_ip : module.aks_bootstrap.aks_ingress_public_ip
+  aks_ingress_ip            = module.acae.static_ip_address
   subnet_front_end_prefix   = cidrsubnet(var.vnet_cidr.0, 4, 3)
   subnet_backend_end_prefix = cidrsubnet(var.vnet_cidr.0, 4, 4)
   subnet_names              = ["aca"]
   acme_email                = ""
   create_valid_cert         = false
-
+  pick_host_name_from_backend_http_settings = true
+  host_name = "aca.nonprod.stacks.ensono.com"
   ssl_policy = {
     "policy_type" = "Predefined",
     "policy_name" = "AppGwSslPolicy20170401S",
