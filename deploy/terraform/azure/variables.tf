@@ -243,3 +243,12 @@ variable "subnet_names" {
 
   default = [""]
 }
+
+variable "acme_email" {
+  type        = string
+  description = "Email for Acme registration, must be a valid email"
+}
+
+variable "pfx_password" {
+  type = string
+}

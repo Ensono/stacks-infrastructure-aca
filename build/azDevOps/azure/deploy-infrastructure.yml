@@ -189,6 +189,8 @@ stages:
                         TF_VAR_dns_resource_group: $(dns_resource_group)
                         TF_VAR_dns_zone: ${{ stage.dns_zone }}
                         TF_VAR_create_acavnet: $(create_acavnet)
+                        TF_VAR_acme_email: $(acme_email)
+                        TF_VAR_pfx_password: Password1
 
                     # Upload the Terraform variables file and the plan for debugging
                     - ${{ if eq(parameters.upload, true) }}:
