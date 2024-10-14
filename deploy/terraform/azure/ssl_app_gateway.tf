@@ -15,7 +15,7 @@ module "ssl_app_gateway" {
   subnet_backend_end_prefix                 = cidrsubnet(var.vnet_cidr.0, 4, 4)
   subnet_names                              = ["aca"]
   acme_email                                = var.acme_email
-  create_valid_cert                         = true
+  create_valid_cert                         = false
   pick_host_name_from_backend_http_settings = true
   host_name                                 = "aca.${var.dns_zone}"
   ssl_policy = {
