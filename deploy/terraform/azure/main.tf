@@ -36,9 +36,28 @@ module "acae" {
   container_app_environment_name                           = module.default_label.id
   log_analytics_workspace_id                               = azurerm_log_analytics_workspace.la.id
   workload_profiles                                        = var.workload_profiles
-  create_container_app_environment                         = var.create_container_app_environment
-  create_container_app                                     = var.create_container_app
+  create_container_app_environment                         = true
+  create_container_app                                     = false
   create_rg                                                = var.create_rg
   container_app_environment_internal_load_balancer_enabled = true
   container_app_environment_infrastructure_subnet_id       = var.create_acavnet ? azurerm_subnet.aca[0].id : null
+
+  #   # Container App
+  # container_app_name                  = "nginx"
+  # container_app_registry              = local.container_app_registry
+  # container_app_secrets               = local.container_app_secrets
+  # container_app_identity              = local.container_app_identity
+  # container_app_environment_id        = data.azurerm_container_app_environment.acae.id
+  # container_app_workload_profile_name = var.container_app_workload_profile_name
+  # container_app_revision_mode         = var.container_app_revision_mode
+
+  # # Container App Container
+  # container_app_containers             = local.container_app_containers
+  # container_app_container_max_replicas = var.container_app_container_max_replicas
+  # container_app_container_min_replicas = var.container_app_container_min_replicas
+  # container_app_container_volumes      = local.container_app_container_volumes
+
+  # #  Ingress configuration
+  # container_app_ingress_external_enabled = var.container_app_ingress_external_enabled
+  # container_app_ingress_target_port      = var.container_app_ingress_target_port
 }

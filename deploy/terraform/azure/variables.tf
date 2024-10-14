@@ -64,17 +64,6 @@ variable "create_rg" {
   description = "Set value whether to create a Resource group using ACA module or not."
 }
 
-variable "create_container_app_environment" {
-  type        = bool
-  default     = true
-  description = "Set value whether to create a Container App Environment or not."
-}
-
-variable "create_container_app" {
-  type        = bool
-  default     = false
-  description = "Set value whether to create Container Apps or not."
-}
 
 variable "workload_profiles" {
   type = list(object({
