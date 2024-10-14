@@ -29,7 +29,7 @@ resource "azurerm_resource_group" "default" {
 }
 
 module "acae" {
-  source = "git::https://github.com/Ensono/terraform-azurerm-aca?ref=add-additional-outputs"
+  source = "git::https://github.com/Ensono/terraform-azurerm-aca?ref=1.0.2"
 
   resource_group_name                                      = azurerm_resource_group.default.name
   location                                                 = azurerm_resource_group.default.location
