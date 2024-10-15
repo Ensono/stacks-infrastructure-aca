@@ -84,7 +84,7 @@ variables:
     value: true
 
   # -------- Network Domain names
-  - name: create_acavnet
+  - name: create_aca_vnet
     value: true
 
   # -------- Network Domain names

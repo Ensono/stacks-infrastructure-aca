@@ -40,5 +40,5 @@ module "acae" {
   create_container_app                                     = false
   create_rg                                                = var.create_rg
   container_app_environment_internal_load_balancer_enabled = true
-  container_app_environment_infrastructure_subnet_id       = var.create_acavnet ? azurerm_subnet.aca[0].id : null
+  container_app_environment_infrastructure_subnet_id       = var.create_aca_vnet ? azurerm_subnet.aca[0].id : null
 }

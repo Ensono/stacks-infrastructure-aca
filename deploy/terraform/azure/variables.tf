@@ -192,7 +192,7 @@ variable "dns_resource_group" {
 ###########################
 # VNET 
 ###########################
-variable "create_acavnet" {
+variable "create_aca_vnet" {
   description = "whether to create a vnet"
   type        = bool
 

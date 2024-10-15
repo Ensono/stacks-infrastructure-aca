@@ -5,7 +5,7 @@ module "ssl_app_gateway" {
   resource_group_name                       = azurerm_resource_group.default.name
   resource_group_location                   = azurerm_resource_group.default.location
   dns_resource_group                        = var.dns_resource_group
-  vnet_name                                 = var.create_acavnet ? azurerm_virtual_network.default[0].name : data.azurerm_virtual_network.default[0].name
+  vnet_name                                 = var.create_aca_vnet ? azurerm_virtual_network.default[0].name : data.azurerm_virtual_network.default[0].name
   vnet_cidr                                 = var.vnet_cidr
   dns_zone                                  = var.dns_zone
   pfx_password                              = var.pfx_password

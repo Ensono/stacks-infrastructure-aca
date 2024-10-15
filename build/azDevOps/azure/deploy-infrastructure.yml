@@ -188,7 +188,7 @@ stages:
                         TF_VAR_create_app_insights: $(create_app_insights)
                         TF_VAR_dns_resource_group: $(dns_resource_group)
                         TF_VAR_dns_zone: ${{ stage.dns_zone }}
-                        TF_VAR_create_acavnet: $(create_acavnet)
+                        TF_VAR_create_aca_vnet: $(create_aca_vnet)
                         TF_VAR_acme_email: $(acme_email)
                         TF_VAR_pfx_password: Password1
 
