@@ -37,58 +37,8 @@ module "acae" {
   log_analytics_workspace_id                               = azurerm_log_analytics_workspace.la.id
   workload_profiles                                        = var.workload_profiles
   create_container_app_environment                         = true
-  create_container_app                                     = true
+  create_container_app                                     = false
   create_rg                                                = var.create_rg
   container_app_environment_internal_load_balancer_enabled = true
   container_app_environment_infrastructure_subnet_id       = var.create_acavnet ? azurerm_subnet.aca[0].id : null
-
-  # Container App
-  container_app_name = "nginx"
-  container_app_registry = {
-    server   = "${var.acr_name}.azurecr.io"
-    identity = azurerm_user_assigned_identity.default.id
-  }
-  container_app_identity = {
-    type         = "UserAssigned",
-    identity_ids = [azurerm_user_assigned_identity.default.id]
-  }
-
-  container_app_workload_profile_name = "Consumption"
-  container_app_revision_mode         = "Single"
-
-  # Container App Container
-  container_app_containers = [
-    {
-      cpu    = 0.25
-      image  = "nginx:latest"
-      memory = "0.5Gi"
-      name   = "nginx"
-      # env = [{
-      #   name  = "API_BASE_URL"
-      #   value = "https://backendapp.lemonocean-9d31a840.uksouth.azurecontainerapps.io"
-      # }]
-      volume_mounts = [
-        # {
-        #   name = "data"
-        #   path = "/app/data"
-        # }
-      ]
-    }
-
-  ]
-  container_app_container_max_replicas = 1
-  container_app_container_min_replicas = 1
-  # container_app_container_volumes      = [
-  #   {
-  #     name         = "data"
-  #     storage_type = "EmptyDir"
-  #   }
-  # ]
-
-  #  Ingress configuration
-  container_app_ingress_external_enabled           = true
-  container_app_ingress_target_port                = 80
-  container_app_ingress_allow_insecure_connections = true
-  create_custom_domain_for_container_app           = true
-  custom_domain                                    = "aca.${var.dns_zone}"
 }
