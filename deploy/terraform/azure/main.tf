@@ -29,7 +29,7 @@ resource "azurerm_resource_group" "default" {
 }
 
 module "acae" {
-  source = "git::https://github.com/Ensono/terraform-azurerm-aca?ref=1.0.2"
+  source = "git::https://github.com/Ensono/terraform-azurerm-aca?ref=1.0.3"
 
   resource_group_name                                      = azurerm_resource_group.default.name
   location                                                 = azurerm_resource_group.default.location
@@ -89,10 +89,6 @@ module "acae" {
   container_app_ingress_external_enabled           = true
   container_app_ingress_target_port                = 80
   container_app_ingress_allow_insecure_connections = true
-}
-
-resource "azurerm_container_app_custom_domain" "app" {
-  name                     = "aca.${var.dns_zone}"
-  container_app_id         = module.acae.container_app_id
-  certificate_binding_type = "Disabled"
+  create_custom_domain_for_container_app           = true
+  custom_domain                                    = "aca.${var.dns_zone}"
 }
