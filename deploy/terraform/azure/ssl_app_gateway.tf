@@ -1,5 +1,5 @@
 module "ssl_app_gateway" {
-  source = "git::https://github.com/Ensono/stacks-terraform//azurerm/modules/azurerm-app-gateway?ref=6.0.24"
+  source = "git::https://github.com/Ensono/stacks-terraform//azurerm/modules/azurerm-app-gateway?ref=v6.0.24"
 
   resource_namer            = module.default_label.id
   resource_group_name       = azurerm_resource_group.default.name
