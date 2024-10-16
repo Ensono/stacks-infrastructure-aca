@@ -14,7 +14,7 @@ output "acae_id" {
 # ACR
 #########################################
 # If the ACR was created by this deployment then return its name otherwise return the ACR name that has been created by a different deployment
-output "acr_name" {
+output "acr_registry_name" {
   description = "Created ACR name"
   value       = var.create_acr ? azurerm_container_registry.registry.0.name : var.acr_name
   depends_on  = [azurerm_resource_group.default]
