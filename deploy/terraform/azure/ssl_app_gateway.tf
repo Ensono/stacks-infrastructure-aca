@@ -16,9 +16,9 @@ module "ssl_app_gateway" {
   subnet_names                              = ["aca"]
   acme_email                                = var.acme_email
   create_valid_cert                         = true
-  pick_host_name_from_backend_http_settings = true
   probe_path                                = "/"
-  host_name                                 = "aca.${var.dns_zone}"
+  # We need to set the status code here to 404 because we are using custom domains in the ACA in order for the requests to be routed correctly.
+  expected_status_codes                     = ["404"]
   ssl_policy = {
     "policy_type" = "Predefined",
     "policy_name" = "AppGwSslPolicy20170401S",
