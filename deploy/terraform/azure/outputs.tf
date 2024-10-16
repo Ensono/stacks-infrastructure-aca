@@ -103,3 +103,11 @@ output "vnet_address_id" {
   description = "Specified VNET Id"
   value       = var.create_aca_vnet ? azurerm_virtual_network.default[0].id : data.azurerm_virtual_network.default[0].id
 }
+
+#########################################
+# App Gateway
+#########################################
+output "app_gateway_ip" {
+  description = "Application Gateway public IP. Should be used with DNS provider at a top level. Can have multiple subs pointing to it - e.g. app.sub.domain.com, app-uat.sub.domain.com. App Gateway will perform SSL termination for all "
+  value       = module.ssl_app_gateway.app_gateway_ip
+}
