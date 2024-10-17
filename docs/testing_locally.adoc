@@ -9,7 +9,7 @@ weight: 70
 
 Ensure that your taskctl envfile OR environment variables contain the following values:
 
-* `rg_name`
+* `resource_group_name`
   - Description: Group containing all the resources for the Azure Container App
 
 * `acae_name`
@@ -45,7 +45,7 @@ taskctl tests
 ```yaml
 # Define the inputs for the control
 inputs:
-  - name: rg_name
+  - name: resource_group_name
     description: Group containing all the resources for the Azure Kubernertes Cluster
   - name: location
     description: location that the resources are expected to be deployed into

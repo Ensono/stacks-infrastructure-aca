@@ -64,17 +64,6 @@ variable "create_rg" {
   description = "Set value whether to create a Resource group using ACA module or not."
 }
 
-variable "create_container_app_environment" {
-  type        = bool
-  default     = true
-  description = "Set value whether to create a Container App Environment or not."
-}
-
-variable "create_container_app" {
-  type        = bool
-  default     = false
-  description = "Set value whether to create Container Apps or not."
-}
 
 variable "workload_profiles" {
   type = list(object({
@@ -88,12 +77,6 @@ variable "workload_profiles" {
       name                  = "Consumption"
       workload_profile_type = "Consumption"
       maximum_count         = 1
-      minimum_count         = 1
-    },
-    {
-      name                  = "Standard"
-      workload_profile_type = "D4"
-      maximum_count         = 3
       minimum_count         = 1
     }
   ]
@@ -118,7 +101,7 @@ variable "acr_resource_group" {
   default = ""
 }
 
-variable "acr_registry_name" {
+variable "acr_name" {
   description = "ACR name"
   type        = string
 
@@ -181,4 +164,74 @@ variable "create_key_vault" {
   type        = bool
 
   default = false
+}
+
+#########################################
+# DNS
+#########################################
+variable "dns_zone" {
+  description = "Dns zone name - e.g. nonprod.domain.com, you should avoid using an APEX zone"
+  type        = string
+
+  default = ""
+}
+
+variable "dns_resource_group" {
+  type        = string
+  description = "RG that contains the existing DNS zones, if the zones are not being created here"
+
+  default = null
+}
+
+###########################
+# VNET 
+###########################
+variable "create_aca_vnet" {
+  description = "whether to create a vnet"
+  type        = bool
+
+  default = false
+}
+
+variable "vnet_resource_group" {
+  description = "Supply your own resource group name for vnet"
+  type        = string
+
+  default = ""
+}
+
+variable "vnet_name" {
+  description = "vnet name"
+  type        = string
+
+  default = ""
+}
+
+variable "vnet_cidr" {
+  description = "CIDR block notation for VNET"
+  type        = list(string)
+  default     = ["11.1.0.0/16"]
+}
+
+variable "subnet_prefixes" {
+  description = "Prefix for subnet - should be in the form of x.x.x.x/x"
+  type        = list(string)
+
+  default = [""]
+}
+
+variable "subnet_names" {
+  description = "Names for subnets"
+  type        = list(string)
+
+  default = [""]
+}
+
+variable "acme_email" {
+  type        = string
+  description = "Email for Acme registration, must be a valid email"
+}
+
+variable "pfx_password" {
+  type = string
 }
