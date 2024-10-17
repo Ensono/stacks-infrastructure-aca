@@ -78,12 +78,6 @@ variable "workload_profiles" {
       workload_profile_type = "Consumption"
       maximum_count         = 1
       minimum_count         = 1
-    },
-    {
-      name                  = "Standard"
-      workload_profile_type = "D4"
-      maximum_count         = 3
-      minimum_count         = 1
     }
   ]
   description = "List of workload profiles to be created in the Container App Environment. Workload profile type for the workloads to run on. Possible values include `Consumption`, `D4`, `D8`, `D16`, `D32`, `E4`, `E8`, `E16` and `E32`."
