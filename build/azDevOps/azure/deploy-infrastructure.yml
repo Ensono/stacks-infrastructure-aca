@@ -65,12 +65,14 @@ parameters:
         environment_shortname: nonprod
         deployment_infra: InfraNonProd
         deployment_apps: ACANonProd
+        dns_zone: $(base_domain_nonprod)
       - stage: Prod
         dependsOn: Build
         condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
         environment_shortname: prod
         deployment_infra: InfraProd
         deployment_apps: ACAProd
+        dns_zone: $(base_domain_prod)
 
   - name: debug
     displayName: Turn on debug for the Independent Runner
@@ -148,7 +150,7 @@ stages:
         dependsOn: ${{ stage.dependsOn }}
         condition: and(succeeded(), or(${{ stage.condition }}, ${{ parameters.force_deploy }}))
         variables:
-          - group: stacks-credentials-nonprod-kv
+          - group: azure-sp-creds #stacks-credentials-nonprod-kv
         jobs:
           - deployment: ${{ stage.deployment_infra }}
             environment: ${{ variables.domain }}-${{ stage.environment_shortname }}
@@ -179,6 +181,16 @@ stages:
                         TF_VAR_name_component: $(domain)
                         TF_VAR_stage: ${{ stage.environment_shortname }}
                         TF_VAR_location: $(region)
+                        TF_VAR_create_key_vault: $(create_key_vault)
+                        TF_VAR_create_acr: $(create_acr)
+                        TF_VAR_acr_resource_group: $(acr_resource_group)
+                        TF_VAR_acr_name: $(acr_name)
+                        TF_VAR_create_app_insights: $(create_app_insights)
+                        TF_VAR_dns_resource_group: $(dns_resource_group)
+                        TF_VAR_dns_zone: ${{ stage.dns_zone }}
+                        TF_VAR_create_aca_vnet: $(create_aca_vnet)
+                        TF_VAR_acme_email: $(acme_email)
+                        TF_VAR_pfx_password: Password1
 
                     # Upload the Terraform variables file and the plan for debugging
                     - ${{ if eq(parameters.upload, true) }}:
@@ -194,10 +206,6 @@ stages:
                               taskctl infrastructure_destroy
                           env:
                             CLOUD_PLATFORM: "$(cloud_platform)"
-                            ARM_TENANT_ID: $(azure-tenant-id)
-                            ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            ARM_CLIENT_ID: $(azure-client-id)
-                            ARM_CLIENT_SECRET: $(azure-client-secret)
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_DESTROY_PLAN: "-input=false,-out=\"destroy\""
@@ -213,10 +221,6 @@ stages:
                               taskctl infrastructure
                           env:
                             CLOUD_PLATFORM: "$(cloud_platform)"
-                            ARM_TENANT_ID: $(azure-tenant-id)
-                            ARM_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            ARM_CLIENT_ID: $(azure-client-id)
-                            ARM_CLIENT_SECRET: $(azure-client-secret)
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
                             TF_BACKEND_PLAN: "-input=false,-out=\"tfplan\""
@@ -232,10 +236,10 @@ stages:
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
                             TF_VAR_location: $(region)
-                            AZURE_TENANT_ID: $(azure-tenant-id)
-                            AZURE_SUBSCRIPTION_ID: $(azure-subscription-id)
-                            AZURE_CLIENT_ID: $(azure-client-id)
-                            AZURE_CLIENT_SECRET: $(azure-client-secret)
+                            AZURE_TENANT_ID: $(ARM_TENANT_ID)
+                            AZURE_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+                            AZURE_CLIENT_ID: $(ARM_CLIENT_ID)
+                            AZURE_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
 
                     - ${{ if eq(parameters.deploy, true) }}:
                         - task: PublishTestResults@2
