@@ -2,7 +2,7 @@ variables:
   # ------- General Agent Setup
   # set the region that the resources should be deployed to
   - name: region
-    value: uksouth
+    value: westeurope
 
   # ------- Stacks configuration
   # name of the company that owns the project
