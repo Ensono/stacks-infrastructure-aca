@@ -61,14 +61,14 @@ parameters:
     default:
       - stage: NonProd
         dependsOn: Build
-        condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')
+        condition: ne(variables['Build.SourceBranch'], 'refs/heads/main')
         environment_shortname: nonprod
         deployment_infra: InfraNonProd
         deployment_apps: ACANonProd
         dns_zone: $(base_domain_nonprod)
       - stage: Prod
         dependsOn: Build
-        condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+        condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
         environment_shortname: prod
         deployment_infra: InfraProd
         deployment_apps: ACAProd
@@ -251,11 +251,11 @@ stages:
 
   - stage: Release
     dependsOn:
-      - ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+      - ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/main') }}:
           - NonProd
       - ${{ else }}:
           - Prod
-    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(${{ parameters.pre_release }}, true)))
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(${{ parameters.pre_release }}, true)))
     variables:
       - group: github-creds   #amido-stacks-webapp
       - name: version_number
@@ -279,5 +279,5 @@ stages:
               STAGE: "release"
               PUBLISH_RELEASE: "true"
               GITHUB_TOKEN: "$(API_KEY)"
-              ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+              ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/main') }}:
                 PRERELEASE: "true"
