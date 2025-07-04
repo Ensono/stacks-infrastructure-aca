@@ -126,22 +126,23 @@ stages:
 
           # Create the documentation for the repo
           - ${{ if eq(parameters.run_docs, true) }}:
-              - task: Bash@3
-                displayName: Documentation
-                inputs:
-                  targetType: inline
-                  script: |
-                    taskctl docs
-                env:
-                  DOCKER_IMAGE_TAG: $(version_number)
+            - task: Bash@3
+              displayName: Documentation
+              inputs:
+                targetType: inline
+                script: |
+                  taskctl docs
+              env:
+                DOCKER_IMAGE_TAG: $(version_number)
 
           # Upload the documentation as a build artifact
           - ${{ if eq(parameters.run_docs, true) }}:
-              - task: PublishBuildArtifacts@1
-                displayName: Publish Documentation
-                inputs:
-                  pathToPublish: $(Build.SourcesDirectory)/outputs/docs
-                  artifactName: docs
+            - task: PublishBuildArtifacts@1
+              displayName: Publish Documentation
+              inputs:
+                pathToPublish: $(Build.SourcesDirectory)/outputs/docs
+                artifactName: docs
+
 
   # Called Non-Prod instead of Dev as all Non-Production stages will deploy to here
   - ${{ each stage in parameters.stages }}:
@@ -207,7 +208,7 @@ stages:
                             CLOUD_PLATFORM: "$(cloud_platform)"
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
-                            TF_BACKEND_DESTROY_PLAN: '-input=false,-out="destroy"'
+                            TF_BACKEND_DESTROY_PLAN: "-input=false,-out=\"destroy\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
 
                     # Create the resources
@@ -222,7 +223,7 @@ stages:
                             CLOUD_PLATFORM: "$(cloud_platform)"
                             TF_FILE_LOCATION: /app/deploy/terraform/azure
                             TF_BACKEND_INIT: "key=$(tf_state_key),container_name=$(tf_state_container),storage_account_name=$(tf_state_storage),resource_group_name=$(tf_state_rg)"
-                            TF_BACKEND_PLAN: '-input=false,-out="tfplan"'
+                            TF_BACKEND_PLAN: "-input=false,-out=\"tfplan\""
                             TF_VAR_name_environment: ${{ stage.environment_shortname }}
 
                     # Perform infrastructure tests
@@ -256,7 +257,7 @@ stages:
           - Prod
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(${{ parameters.pre_release }}, true)))
     variables:
-      - group: github-creds #amido-stacks-webapp
+      - group: github-creds   #amido-stacks-webapp
       - name: version_number
         value: "$(version_major).$(version_minor).$(version_revision)"
     jobs:
