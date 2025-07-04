@@ -13,6 +13,7 @@ resource "azurerm_application_insights" "default" {
   name                = module.default_label.id
   resource_group_name = azurerm_resource_group.default.name
   location            = azurerm_resource_group.default.location
+  workspace_id        = azurerm_log_analytics_workspace.la.id
   application_type    = var.log_application_type
   depends_on          = [azurerm_resource_group.default]
   lifecycle {
